@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import './App.css';
 import Posts from './components/Posts.jsx';
 import FormAddPost from './components/FormAddPost.jsx';
 import Header from './components/Header.jsx';
