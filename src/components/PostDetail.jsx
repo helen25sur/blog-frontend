@@ -12,7 +12,7 @@ export default function PostDetail() {
   const [editImageURL, setEditImageURL] = useState('')
 
   useEffect(() => {
-    fetch(`http://localhost:3000/${id}`)
+    fetch(`https://blog-backend-pz08.onrender.com/${id}`)
       .then(res => res.json())
       .then(data => {
         setPost(data);
@@ -23,7 +23,7 @@ export default function PostDetail() {
   }, [id]);
 
   const handleSaveClick = () => {
-    fetch(`http://localhost:3000/post-edit/${id}`, {
+    fetch(`https://blog-backend-pz08.onrender.com/post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -43,7 +43,7 @@ export default function PostDetail() {
  const navigate = useNavigate();
 
 const deletePost = () => {
-  fetch(`http://localhost:3000/post-delete/${id}`, {
+  fetch(`https://blog-backend-pz08.onrender.com/post-delete/${id}`, {
     method: 'DELETE',
   })
   .then(res => {

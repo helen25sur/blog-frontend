@@ -14,14 +14,14 @@ function App() {
     const [content, setContent] = useState('');
   
     useEffect(() => {
-      fetch('http://localhost:3000/')
+      fetch('https://blog-backend-pz08.onrender.com/')
         .then(res => res.json())
         .then(data => setPosts(data));
     }, []);
   
     const addPost = (event) => {
       event.preventDefault();
-      fetch('http://localhost:3000/', {
+      fetch('https://blog-backend-pz08.onrender.com/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, content, imageURL })
