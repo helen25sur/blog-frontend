@@ -1,1 +1,62 @@
 @import "tailwindcss";
+
+.posts-list {
+  grid-template-areas: 
+    "post1 post2"
+    "post1 post3"
+    "post4 post4";
+}
+
+.post-item {
+  text-align: justify;
+}
+
+.posts-list .post-item:nth-child(1) {
+  grid-area: post1;
+}
+
+.posts-list .post-item:nth-child(1) .post-title,
+.posts-list .post-item:nth-child(4) .post-title {
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: normal;
+  position: relative;
+  padding-right: 24px;
+}
+
+.posts-list .post-item:nth-child(1) .post-title::after,
+.posts-list .post-item:nth-child(4) .post-title::after {
+  content: '';
+  position: absolute;
+  display: block;
+  right: 0;
+  top: 6px;
+  width: 24px;
+  height: 28px;
+  background-image: url('/link.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.posts-list .post-item:nth-child(2) .post-title,
+.posts-list .post-item:nth-child(3) .post-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.posts-list .post-item:nth-child(2) {
+  grid-area: post2;
+}
+
+.posts-list .post-item:nth-child(3) {
+  grid-area: post3;
+}
+
+.posts-list .post-item:nth-child(4) {
+  grid-area: post4;
+}
+
+.post-item:first-child .post-container {
+  flex-direction: column;
+}
