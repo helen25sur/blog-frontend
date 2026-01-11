@@ -22,7 +22,8 @@ export default function PostDetail() {
       });
   }, [id]);
 
-  const handleSaveClick = () => {
+  const handleSaveClick = (event) => {
+    event.preventDefault();
     fetch(`https://blog-backend-pz08.onrender.com/post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
