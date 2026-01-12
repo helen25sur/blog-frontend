@@ -12,7 +12,9 @@ export default function PostDetail() {
   const [editImageURL, setEditImageURL] = useState('')
 
   useEffect(() => {
-    fetch(`https://blog-backend-pz08.onrender.com/${id}`)
+    // const link = import.meta.env.VITE_LINK_API_URL;
+    const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+    fetch(`${linkLocal}/${id}`)
       .then(res => res.json())
       .then(data => {
         setPost(data);
@@ -24,7 +26,9 @@ export default function PostDetail() {
 
   const handleSaveClick = (event) => {
     event.preventDefault();
-    fetch(`https://blog-backend-pz08.onrender.com/post-edit/${id}`, {
+    // const link = import.meta.env.VITE_LINK_API_URL;
+    const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+    fetch(`${linkLocal}/post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -44,7 +48,9 @@ export default function PostDetail() {
  const navigate = useNavigate();
 
 const deletePost = () => {
-  fetch(`https://blog-backend-pz08.onrender.com/post-delete/${id}`, {
+  // const link = import.meta.env.VITE_LINK_API_URL;
+    const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+  fetch(`${linkLocal}/post-delete/${id}`, {
     method: 'DELETE',
   })
   .then(res => {

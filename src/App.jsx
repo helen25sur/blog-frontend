@@ -14,14 +14,18 @@ function App() {
     const [content, setContent] = useState('');
   
     useEffect(() => {
-      fetch('https://blog-backend-pz08.onrender.com/')
+      // const link = import.meta.env.VITE_LINK_API_URL;
+      const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+      fetch(`${linkLocal}/`)
         .then(res => res.json())
         .then(data => setPosts(data));
     }, []);
   
     const addPost = (event) => {
       event.preventDefault();
-      fetch('https://blog-backend-pz08.onrender.com/', {
+      // const link = import.meta.env.VITE_LINK_API_URL;
+      const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+      fetch(`${linkLocal}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title, content, imageURL })
@@ -40,7 +44,7 @@ function App() {
 
 
   return (
-    <div className='container max-w-350 px-28 py-7.5 mx-auto'>
+    <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
       <Navigation/>
       <Routes>
         <Route path="/" element={<Home posts={posts} />} /> 

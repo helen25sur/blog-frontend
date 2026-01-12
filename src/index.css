@@ -5,6 +5,7 @@
     "post1 post2"
     "post1 post3"
     "post4 post4";
+  grid-template-rows: auto;
 }
 
 .post-item {
@@ -59,4 +60,42 @@
 
 .post-item:first-child .post-container {
   flex-direction: column;
+}
+
+@media screen and (min-width: 834px) and (max-width: 1200px) {
+  .posts-list {
+  grid-template-areas: 
+    "post1 post1"
+    "post2 post2"
+    "post3 post3"
+    "post4 post4";
+  }
+
+  .post-item:nth-child(4) .post-container {
+    flex-direction: column;
+  }
+
+  .posts-list .post-item:nth-child(1) .post-title, 
+  .posts-list .post-item:nth-child(4) .post-title {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 833px){
+  .posts-list {
+  grid-template-areas: 
+    "post1 post1"
+    "post2 post2"
+    "post3 post3"
+    "post4 post4";
+  }
+
+  .post-item .post-container {
+    flex-direction: column;
+  }
+
+  .posts-list .post-item:nth-child(1) .post-title, 
+  .posts-list .post-item:nth-child(4) .post-title {
+    font-size: 24px;
+  }
 }
