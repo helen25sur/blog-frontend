@@ -16,7 +16,7 @@ function App() {
     useEffect(() => {
       // const link = import.meta.env.VITE_LINK_API_URL;
       const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
-      fetch(`${linkLocal}/`)
+      fetch(`${linkLocal}`)
         .then(res => res.json())
         .then(data => setPosts(data));
     }, []);
