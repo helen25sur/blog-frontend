@@ -11,9 +11,9 @@ export default function PostDetail() {
   const [editImageURL, setEditImageURL] = useState('')
 
   useEffect(() => {
-    // const link = import.meta.env.VITE_LINK_API_URL;
-    const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
-    fetch(`${linkLocal}${id}`)
+    const link = import.meta.env.VITE_LINK_API_URL;
+    // const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+    fetch(`${link}${id}`)
       .then(res => res.json())
       .then(data => {
         setPost(data);
@@ -25,9 +25,9 @@ export default function PostDetail() {
 
   const handleSaveClick = (event) => {
     event.preventDefault();
-    // const link = import.meta.env.VITE_LINK_API_URL;
-    const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
-    fetch(`${linkLocal}post-edit/${id}`, {
+    const link = import.meta.env.VITE_LINK_API_URL;
+    // const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+    fetch(`${link}post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -47,9 +47,9 @@ export default function PostDetail() {
   const navigate = useNavigate();
 
   const deletePost = () => {
-    // const link = import.meta.env.VITE_LINK_API_URL;
-    const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
-    fetch(`${linkLocal}post-delete/${id}`, {
+    const link = import.meta.env.VITE_LINK_API_URL;
+    // const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
+    fetch(`${link}post-delete/${id}`, {
       method: 'DELETE',
     })
       .then(res => {
