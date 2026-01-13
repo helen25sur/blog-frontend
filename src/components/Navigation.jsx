@@ -13,7 +13,7 @@ export default function Navigation () {
             <Link to="/">Home</Link>
           </li>
           <li className="underline">
-            <Link to="/posts">Posts</Link>  
+            <Link to="/all">Posts</Link>  
           </li>
           <li className="underline">
             <Link to="/posts/add-post">Add Post</Link>  

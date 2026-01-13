@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export default function PostDetail() {
+export default function PostDetail({link}) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
@@ -11,8 +11,6 @@ export default function PostDetail() {
   const [editImageURL, setEditImageURL] = useState('')
 
   useEffect(() => {
-    const link = import.meta.env.VITE_LINK_API_URL;
-    // const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
     fetch(`${link}${id}`)
       .then(res => res.json())
       .then(data => {
@@ -21,12 +19,10 @@ export default function PostDetail() {
         setEditContent(data.content);
         setEditImageURL(data.imageURL || '');
       });
-  }, [id]);
+  }, [id, link]);
 
   const handleSaveClick = (event) => {
     event.preventDefault();
-    const link = import.meta.env.VITE_LINK_API_URL;
-    // const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
     fetch(`${link}post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -47,8 +43,6 @@ export default function PostDetail() {
   const navigate = useNavigate();
 
   const deletePost = () => {
-    const link = import.meta.env.VITE_LINK_API_URL;
-    // const linkLocal = import.meta.env.VITE_LINK_API_URL_LOCAL;
     fetch(`${link}post-delete/${id}`, {
       method: 'DELETE',
     })
