@@ -10,6 +10,7 @@ export default function Post({post}) {
         <Link to={`/${post._id}`}>
         {post.title}</Link>
         </h3>
+      <h4>{post.userName}</h4>
       <p>{post.content}</p>
     </div>
   </div>

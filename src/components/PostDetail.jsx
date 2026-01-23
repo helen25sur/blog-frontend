@@ -80,6 +80,7 @@ export default function PostDetail({link}) {
       <div className="image-container">
         {post.imageURL ? <img src={post.imageURL} alt={post.title} /> : null}
       </div>
+      <h2>{post.userName}</h2>
       <p className='lg:text-4xl text-2xl my-10'>{post.content}</p>
       <div className="action-block">
         <button onClick={() => setIsEditing(true)} className="border p-2 mr-5">Edit Post</button>
