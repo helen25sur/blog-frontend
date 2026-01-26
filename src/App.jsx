@@ -8,8 +8,8 @@ import PostDetail from './components/PostDetail.jsx';
 import Navigation from './components/Navigation.jsx';
 import Home from './view/Home.jsx';
 
-// const link = import.meta.env.VITE_LINK_API_URL;
-const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
+const link = import.meta.env.VITE_LINK_API_URL;
+// const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
 
 
 
