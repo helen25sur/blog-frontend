@@ -43,18 +43,20 @@ export default function PostDetail({link}) {
   const navigate = useNavigate();
 
   const deletePost = () => {
-    fetch(`${link}post-delete/${id}`, {
-      method: 'DELETE',
-    })
-      .then(res => {
-        if (res.ok) {
-          navigate('/');
-          window.location.reload();
-        } else {
-          console.error("Server Error");
-        }
+    if (confirm('Do you want to delete this post?')) {
+      fetch(`${link}post-delete/${id}`, {
+        method: 'DELETE',
       })
-      .catch(err => console.error("Error:", err));
+        .then(res => {
+          if (res.ok) {
+            navigate('/');
+            window.location.reload();
+          } else {
+            console.error("Server Error");
+          }
+        })
+        .catch(err => console.error("Error:", err));
+    }
   };
 
   if (!post) return <div>Loading...</div>;
