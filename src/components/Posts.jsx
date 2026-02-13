@@ -2,7 +2,7 @@
 import Post from './Post.jsx';
 
 export default function Posts({ posts }) {
-  
+
   return (
     <div>
       <h2 className='lg:text-4xl text-2xl mb-8 font-medium'>Recent blog posts</h2>
