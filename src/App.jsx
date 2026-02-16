@@ -64,7 +64,7 @@ function App() {
         } />
         <Route path="/:id" element={<PostDetail link={link} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login link={link} />} />
       </Routes>
     </div>
   )

@@ -1,4 +1,33 @@
-export default function Login() {
+export default function Login({ link }) {
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(`${link}login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        // Цей рядок критично важливий для роботи сесій!
+        credentials: 'include',
+        body: JSON.stringify({
+          // TODO: Test credentials, replace with actual form values
+          username: 'Olenka',
+          password: '123'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.error('Login error:', err);
+    }
+  };
+
   return (
     <div className="max-w-md mx-auto">
       <div className="mb-12">
@@ -6,10 +35,12 @@ export default function Login() {
         <p className="text-gray-700 text-lg">Welcome back! Please enter your details.</p>
       </div>
 
-      <form className="space-y-6">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6">
         {/* <!-- Email Field --> */}
         <div>
-          <label for="email" className="block text-sm font-medium text-black mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
             Email
           </label>
           <input
@@ -18,13 +49,13 @@ export default function Login() {
             name="email"
             placeholder="Enter your email"
             className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
-            required
+          // required
           />
         </div>
         {/* 
                 <!-- Password Field --> */}
         <div>
-          <label for="password" className="block text-sm font-medium text-black mb-2">
+          <label htmlFor="password" className="block text-sm font-medium text-black mb-2">
             Password
           </label>
           <input
@@ -33,7 +64,7 @@ export default function Login() {
             name="password"
             placeholder="Enter your password"
             className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
-            required
+          // required
           />
         </div>
 
