@@ -1,4 +1,4 @@
-export default function Login({ link }) {
+export default function Login({ link, setIsLoggedIn }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,6 +23,9 @@ export default function Login({ link }) {
 
       const data = await response.json();
       console.log(data);
+      setIsLoggedIn(true);
+      window.location.href = '/';
+
     } catch (err) {
       console.error('Login error:', err);
     }

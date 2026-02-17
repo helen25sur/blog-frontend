@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Navigation() {
+export default function Navigation({ isLoggedIn, setIsLoggedIn }) {
   return (
     <nav className="flex justify-between width-full mb-10 items-center">
       <div className="logo">
@@ -15,12 +15,21 @@ export default function Navigation() {
         <li className="underline">
           <Link to="/all">Posts</Link>
         </li>
-        <li className="underline">
-          <Link to="/posts/add-post">Add Post</Link>
-        </li>
-        <li className="border border-solid rounded-lg px-4 py-1">
-          <Link to="/login">Login</Link>
-        </li>
+        {isLoggedIn && (
+          <li className="underline">
+            <Link to="/posts/add-post">Add Post</Link>
+          </li>
+        )}
+        {!isLoggedIn && (
+          <li className="border border-solid rounded-lg px-4 py-1">
+            <Link to="/login">Login</Link>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li className="border border-solid rounded-lg px-4 py-1">
+            <Link to="/logout" onClick={() => setIsLoggedIn(false)}>Logout</Link>
+          </li>
+        )}
       </ul>
     </nav>
   )
