@@ -1,6 +1,30 @@
 import { Link } from "react-router-dom";
 
-export default function Navigation({ isLoggedIn, setIsLoggedIn }) {
+export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
+  console.log(isLoggedIn);
+
+  const logoutHandler = async () => {
+    setIsLoggedIn(false);
+    try {
+      const response = await fetch(`${link}logout`, {
+        method: 'POST',
+        // Обов'язково для передачі сесійної куки, щоб сервер знав, кого розлогінювати
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // Очищуємо локальний стейт (наприклад, context або redux)
+        // І перенаправляємо на головну або сторінку логіну
+        window.location.href = '/login';
+      }
+    } catch (err) {
+      console.error('Logout error:', err);
+    }
+  };
+
   return (
     <nav className="flex justify-between width-full mb-10 items-center">
       <div className="logo">
@@ -27,7 +51,7 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn }) {
         )}
         {isLoggedIn && (
           <li className="border border-solid rounded-lg px-4 py-1">
-            <Link to="/logout" onClick={() => setIsLoggedIn(false)}>Logout</Link>
+            <Link to="/logout" onClick={logoutHandler}>Logout</Link>
           </li>
         )}
       </ul>

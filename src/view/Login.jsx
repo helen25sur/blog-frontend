@@ -1,7 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function Login({ link, setIsLoggedIn }) {
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
+
     event.preventDefault();
+    console.log('in handleSubmit')
     try {
       const response = await fetch(`${link}login`, {
         method: 'POST',
@@ -24,7 +29,7 @@ export default function Login({ link, setIsLoggedIn }) {
       const data = await response.json();
       console.log(data);
       setIsLoggedIn(true);
-      window.location.href = '/';
+      navigate('/');
 
     } catch (err) {
       console.error('Login error:', err);
