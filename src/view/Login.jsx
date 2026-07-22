@@ -30,8 +30,8 @@ export default function Login({ link, setIsLoggedIn }) {
       const data = await response.json();
       console.log(data);
       setIsLoggedIn(true);
+      await checkLoginStatus(link, setIsLoggedIn);
       navigate('/');
-      checkLoginStatus(link, setIsLoggedIn);
 
     } catch (err) {
       console.error('Login error:', err);
