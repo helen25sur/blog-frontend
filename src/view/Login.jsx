@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { checkLoginStatus } from '../utils/auth';
 
 export default function Login({ link, setIsLoggedIn }) {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Login({ link, setIsLoggedIn }) {
       console.log(data);
       setIsLoggedIn(true);
       navigate('/');
+      checkLoginStatus(link, setIsLoggedIn);
 
     } catch (err) {
       console.error('Login error:', err);

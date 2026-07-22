@@ -8,11 +8,10 @@ import PostDetail from './components/PostDetail.jsx';
 import Navigation from './components/Navigation.jsx';
 import Home from './view/Home.jsx';
 import Login from './view/Login.jsx';
+import { checkLoginStatus } from './utils/auth.js';
 
 // const link = import.meta.env.VITE_LINK_API_URL;
 const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
-
-
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -25,6 +24,10 @@ function App() {
     fetch(`${link}all`)
       .then(res => res.json())
       .then(data => setPosts(data));
+  }, []);
+
+  useEffect(() => {
+    checkLoginStatus(link, setIsLoggedIn);
   }, []);
 
   const addPost = (event) => {
