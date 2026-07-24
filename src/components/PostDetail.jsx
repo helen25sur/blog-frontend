@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export default function PostDetail({link}) {
+export default function PostDetail({ link, isLoggedIn }) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
@@ -66,7 +66,7 @@ export default function PostDetail({link}) {
       <>
         <h1 className='font-[Inter] lg:text-[98px] lg:leading-30 md:text-7xl md:leading-20 text-5xl leading-16 font-bold mb-10'>Edit Post</h1>
         <form className="font-[Inter] text-2xl mb-10 flex flex-col gap-5 ">
-          <input className="border p-2" value={editTitle} name="title" onChange={e =>                 setEditTitle(e.target.value)} placeholder="Title" required />
+          <input className="border p-2" value={editTitle} name="title" onChange={e => setEditTitle(e.target.value)} placeholder="Title" required />
           <input className="border p-2" value={editImageURL} name="imageURL" onChange={e => setEditImageURL(e.target.value)} placeholder="Image URL" required />
           <textarea className="border p-2" name="content" value={editContent} onChange={e => setEditContent(e.target.value)} placeholder="Content" required />
           <button className="border p-1.5" onClick={handleSaveClick}>Save</button>
@@ -84,10 +84,12 @@ export default function PostDetail({link}) {
       </div>
       <h2>{post.userName}</h2>
       <p className='lg:text-4xl text-2xl my-10'>{post.content}</p>
-      <div className="action-block">
-        <button onClick={() => setIsEditing(true)} className="border p-2 mr-5">Edit Post</button>
-        <button onClick={() => deletePost()} className="border p-2">Delete Post</button>
-      </div>
+      {isLoggedIn && (
+        <div className="action-block">
+          <button onClick={() => setIsEditing(true)} className="border p-2 mr-5">Edit Post</button>
+          <button onClick={() => deletePost()} className="border p-2">Delete Post</button>
+        </div>
+      )}
     </div>
   );
 }

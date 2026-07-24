@@ -66,7 +66,7 @@ function App() {
             addPost={addPost}
           />
         } />
-        <Route path="/:id" element={<PostDetail link={link} />} />
+        <Route path="/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
