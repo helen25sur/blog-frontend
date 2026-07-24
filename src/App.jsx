@@ -8,6 +8,7 @@ import PostDetail from './components/PostDetail.jsx';
 import Navigation from './components/Navigation.jsx';
 import Home from './view/Home.jsx';
 import Login from './view/Login.jsx';
+import Signup from './view/Signup.jsx';
 import { checkLoginStatus } from './utils/auth.js';
 
 // const link = import.meta.env.VITE_LINK_API_URL;
@@ -70,6 +71,7 @@ function App() {
         <Route path="/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   )

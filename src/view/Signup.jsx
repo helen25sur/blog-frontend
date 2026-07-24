@@ -1,53 +1,29 @@
-import { useNavigate } from 'react-router-dom';
-import { checkLoginStatus } from '../utils/auth';
+export default function Signup() {
 
-export default function Login({ link, setIsLoggedIn }) {
-  const navigate = useNavigate();
-
-  const handleSubmit = async (event) => {
-
-    event.preventDefault();
-    console.log('in handleSubmit')
-    try {
-      const response = await fetch(`${link}login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        // Цей рядок критично важливий для роботи сесій!
-        credentials: 'include',
-        body: JSON.stringify({
-          // TODO: Test credentials, replace with actual form values
-          username: 'Olenka',
-          password: '123'
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data);
-      setIsLoggedIn(true);
-      await checkLoginStatus(link, setIsLoggedIn);
-      navigate('/');
-
-    } catch (err) {
-      console.error('Login error:', err);
-    }
-  };
 
   return (
     <div className="max-w-md mx-auto">
       <div className="mb-12">
-        <h2 className="text-6xl font-bold text-black mb-4">LOGIN</h2>
-        <p className="text-gray-700 text-lg">Welcome back! Please enter your details.</p>
+        <h2 className="text-6xl font-bold text-black mb-4">SIGNUP</h2>
+        <p className="text-gray-700 text-lg">Welcome! Please enter your details.</p>
       </div>
 
       <form
-        onSubmit={handleSubmit}
         className="space-y-6">
+        {/* <!-- Username Field --> */}
+        <div>
+          <label htmlFor="username" className="block text-sm font-medium text-black mb-2">
+            Username
+          </label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+          // required
+          />
+        </div>
         {/* <!-- Email Field --> */}
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
@@ -77,8 +53,21 @@ export default function Login({ link, setIsLoggedIn }) {
           // required
           />
         </div>
+        <div>
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-black mb-2">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            placeholder="Confirm your password"
+            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+          // required
+          />
+        </div>
 
-        {/* <!-- Remember Me & Forgot Password --> */}
+        {/* <!-- Remember Me --> */}
         <div className="flex items-center justify-between">
           <label className="flex items-center">
             <input
@@ -87,9 +76,6 @@ export default function Login({ link, setIsLoggedIn }) {
             />
             <span className="ml-2 text-sm text-gray-800">Remember me</span>
           </label>
-          <a href="#" className="text-sm text-black hover:underline font-medium">
-            Forgot password?
-          </a>
         </div>
 
         {/* <!-- Submit Button --> */}
@@ -97,7 +83,7 @@ export default function Login({ link, setIsLoggedIn }) {
           type="submit"
           className="w-full py-3 bg-black text-white font-medium rounded-md hover:bg-gray-900 cursor-pointer transition"
         >
-          Sign in
+          Sign up
         </button>
 
         {/* <!-- Divider --> */}
@@ -135,12 +121,13 @@ export default function Login({ link, setIsLoggedIn }) {
           </button>
         </div>
 
-        {/* <!-- Sign Up Link --> */}
+        {/* <!-- Already have an account? --> */}
         <p className="text-center text-sm text-gray-600 mt-6">
-          Don't have an account?
-          <a href="/signup" className="text-black font-medium hover:underline"> Sign up</a>
+          Already have an account?
+          <a href="/login" className="text-black font-medium hover:underline"> Log in</a>
         </p>
       </form>
     </div>
-  );
+  )
+
 }
