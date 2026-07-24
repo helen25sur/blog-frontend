@@ -45,18 +45,18 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
           </li>
         )}
         {!isLoggedIn && (
-          <li className="border border-solid rounded-lg px-4 py-1">
-            <Link to="/login">Login</Link>
+          <li className="border border-solid rounded-lg ">
+            <Link className="px-4 py-1 block w-full h-full" to="/login">Login</Link>
           </li>
         )}
         {!isLoggedIn && (
-          <li className="border border-solid rounded-lg px-4 py-1">
-            <Link to="/signup">Sign Up</Link>
+          <li className="border border-solid rounded-lg">
+            <Link className="px-4 py-1 block w-full h-full" to="/signup">Sign Up</Link>
           </li>
         )}
         {isLoggedIn && (
-          <li className="border border-solid rounded-lg px-4 py-1">
-            <Link to="/logout" onClick={logoutHandler}>Logout</Link>
+          <li className="border border-solid rounded-lg">
+            <Link className="px-4 py-1 block w-full h-full" to="/logout" onClick={logoutHandler}>Logout</Link>
           </li>
         )}
       </ul>
