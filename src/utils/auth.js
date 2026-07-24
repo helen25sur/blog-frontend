@@ -17,3 +17,18 @@ export const checkLoginStatus = async (link, setIsLoggedIn) => {
     setIsLoggedIn(false);
   }
 }
+
+export async function authRequest(link, endpoint, body) {
+  const response = await fetch(`${link}${endpoint}`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    throw new Error(`Error: ${response.status}`);
+  }
+
+  return response.json();
+}
