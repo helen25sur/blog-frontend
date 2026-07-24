@@ -26,6 +26,7 @@ export default function PostDetail({ link, isLoggedIn }) {
     fetch(`${link}post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({
         title: editTitle,
         content: editContent,
@@ -46,6 +47,7 @@ export default function PostDetail({ link, isLoggedIn }) {
     if (confirm('Do you want to delete this post?')) {
       fetch(`${link}post-delete/${id}`, {
         method: 'DELETE',
+        credentials: 'include',
       })
         .then(res => {
           if (res.ok) {

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
-  console.log(isLoggedIn);
+  // console.log(isLoggedIn);
 
   const logoutHandler = async () => {
     setIsLoggedIn(false);

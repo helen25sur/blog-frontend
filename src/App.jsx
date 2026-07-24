@@ -35,6 +35,7 @@ function App() {
     fetch(`${link}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ title, content, imageURL })
     })
       .then(res => res.json())
