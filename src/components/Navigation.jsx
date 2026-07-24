@@ -49,6 +49,11 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
             <Link to="/login">Login</Link>
           </li>
         )}
+        {!isLoggedIn && (
+          <li className="border border-solid rounded-lg px-4 py-1">
+            <Link to="/signup">Sign Up</Link>
+          </li>
+        )}
         {isLoggedIn && (
           <li className="border border-solid rounded-lg px-4 py-1">
             <Link to="/logout" onClick={logoutHandler}>Logout</Link>
