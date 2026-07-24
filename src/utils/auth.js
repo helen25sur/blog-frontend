@@ -7,6 +7,7 @@ export const checkLoginStatus = async (link, setIsLoggedIn) => {
 
     if (response.ok) {
       const data = await response.json();
+      console.log('Login status:', data);
       setIsLoggedIn(data.isAuthenticated);
     } else {
       setIsLoggedIn(false);

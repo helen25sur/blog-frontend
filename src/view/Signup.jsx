@@ -1,5 +1,41 @@
-export default function Signup() {
+import { useNavigate } from 'react-router-dom';
+import { checkLoginStatus } from '../utils/auth';
 
+export default function Signup({ link, setIsLoggedIn }) {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log('in handleSubmit')
+    try {
+      const response = await fetch(`${link}signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          // TODO: Test credentials, replace with actual form values
+          username: 'Olenka',
+          email: 'test@test.com',
+          password: '123'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log(data);
+      setIsLoggedIn(true);
+      await checkLoginStatus(link, setIsLoggedIn);
+      navigate('/');
+
+    } catch (err) {
+      console.error('Login error:', err);
+    }
+  };
 
   return (
     <div className="max-w-md mx-auto">
@@ -8,7 +44,7 @@ export default function Signup() {
         <p className="text-gray-700 text-lg">Welcome! Please enter your details.</p>
       </div>
 
-      <form
+      <form onSubmit={handleSubmit}
         className="space-y-6">
         {/* <!-- Username Field --> */}
         <div>

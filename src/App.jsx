@@ -71,7 +71,7 @@ function App() {
         <Route path="/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
     </div>
   )
