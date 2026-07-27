@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 
 import Posts from './components/Posts.jsx';
@@ -21,6 +22,8 @@ function App() {
   const [content, setContent] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetch(`${link}all`)
       .then(res => res.json())
@@ -33,16 +36,24 @@ function App() {
 
   const addPost = (event) => {
     event.preventDefault();
-    fetch(`${link}`, {
+    fetch(`${link}post`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({ title, content, imageURL })
     })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        if (res.status === 401) {
+          throw new Error('Unauthorized: Please log in to add a post.');
+        }
+        return res.json();
+      })
       .then(newPost => setPosts([...posts, newPost]))
       .then(() => {
-        window.location.href = '/';
+        navigate('/posts');
       });
 
     setTitle('');
@@ -56,7 +67,7 @@ function App() {
     <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
       <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} />
       <Routes>
-        <Route path="/all" element={<AllPosts posts={posts} />} />
+        <Route path="/posts" element={<AllPosts posts={posts} />} />
         <Route path="/posts/add-post" element={
           <FormAddPost
             title={title}

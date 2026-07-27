@@ -37,7 +37,7 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
           <Link to="/">Home</Link>
         </li>
         <li className="underline">
-          <Link to="/all">Posts</Link>
+          <Link to="/posts">Posts</Link>
         </li>
         {isLoggedIn && (
           <li className="underline">
