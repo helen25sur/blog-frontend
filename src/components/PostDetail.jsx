@@ -23,7 +23,7 @@ export default function PostDetail({ link, isLoggedIn }) {
 
   const handleSaveClick = (event) => {
     event.preventDefault();
-    fetch(`${link}post-edit/${id}`, {
+    fetch(`${link}posts/post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -45,13 +45,13 @@ export default function PostDetail({ link, isLoggedIn }) {
 
   const deletePost = () => {
     if (confirm('Do you want to delete this post?')) {
-      fetch(`${link}post-delete/${id}`, {
+      fetch(`${link}posts/post-delete/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       })
         .then(res => {
           if (res.ok) {
-            navigate('/');
+            navigate('/posts');
             window.location.reload();
           } else {
             console.error("Server Error");
