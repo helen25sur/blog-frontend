@@ -8,11 +8,11 @@ export default function AllPosts({ posts }) {
       <h2 className='lg:text-4xl text-2xl mb-8 font-medium'>Recent blog posts</h2>
       <ul className='all-posts-list grid grid-rows-3 gap-8'>
         {posts.map(post => (
-          <li className='all-post-item' key={post._id}>
+          <li key={post._id} className='all-post-item' >
             <Post post={post} />
           </li>
         ))}
       </ul>
-    </div>
+    </div >
   );
 }

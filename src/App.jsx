@@ -36,25 +36,28 @@ function App() {
 
   const addPost = (event) => {
     event.preventDefault();
-    fetch(`${link}post`, {
+    fetch(`${link}posts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
       body: JSON.stringify({ title, content, imageURL })
     })
       .then(res => {
-        if (!res.ok) {
-          throw new Error('Network response was not ok');
-        }
         if (res.status === 401) {
-          throw new Error('Unauthorized: Please log in to add a post.');
+          throw new Error('Unauthorized: Please log in');
         }
+
+        if (!res.ok) {
+          throw new Error('Server error');
+        }
+
         return res.json();
       })
       .then(newPost => setPosts([...posts, newPost]))
       .then(() => {
         navigate('/posts');
-      });
+      })
+      .catch(err => console.error("Error:", err));
 
     setTitle('');
     setContent('');
