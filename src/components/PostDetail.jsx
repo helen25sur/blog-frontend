@@ -11,7 +11,7 @@ export default function PostDetail({ link, isLoggedIn }) {
   const [editImageURL, setEditImageURL] = useState('')
 
   useEffect(() => {
-    fetch(`${link}${id}`)
+    fetch(`${link}posts/${id}`)
       .then(res => res.json())
       .then(data => {
         setPost(data);

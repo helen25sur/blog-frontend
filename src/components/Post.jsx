@@ -7,7 +7,7 @@ export default function Post({ post }) {
     </div>
     <div className="post-content-container">
       <h3 className="post-title">
-        <Link to={`/${post._id}`}>
+        <Link to={`/posts/${post._id}`}>
           {post.title}</Link>
       </h3>
       <h4 className="flex">

@@ -1,16 +1,29 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkLoginStatus, authRequest } from '../utils/auth';
 import AuthLayout from '../components/AuthLayout';
 
 export default function Login({ link, setIsLoggedIn }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    }
+  };
 
   const handleSubmit = async (event) => {
 
     event.preventDefault();
     console.log('in handleSubmit')
     try {
-      await authRequest(link, 'login', { username: 'Olenka', password: '123' });
+      await authRequest(link, 'login', { email, password });
       setIsLoggedIn(true);
       await checkLoginStatus(link, setIsLoggedIn);
       navigate('/');
@@ -37,12 +50,13 @@ export default function Login({ link, setIsLoggedIn }) {
             Email
           </label>
           <input
+            onChange={handleInputChange}
             type="email"
             id="email"
             name="email"
             placeholder="Enter your email"
             className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
-          // required
+            required
           />
         </div>
         {/* 
@@ -52,12 +66,13 @@ export default function Login({ link, setIsLoggedIn }) {
             Password
           </label>
           <input
+            onChange={handleInputChange}
             type="password"
             id="password"
             name="password"
             placeholder="Enter your password"
             className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
-          // required
+            required
           />
         </div>
 
