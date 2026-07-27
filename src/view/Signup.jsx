@@ -7,18 +7,32 @@ export default function Signup({ link, setIsLoggedIn }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await authRequest(link, 'signup', { username, email, password });
+      await authRequest(link, 'signup', { username, email, password, confirmPassword });
       setIsLoggedIn(true);
       await checkLoginStatus(link, setIsLoggedIn);
       navigate('/');
     } catch (err) {
       console.error('Signup error:', err);
+    }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    if (name === 'username') {
+      setUsername(value);
+    } else if (name === 'email') {
+      setEmail(value);
+    } else if (name === 'password') {
+      setPassword(value);
+    } else if (name === 'confirmPassword') {
+      setConfirmPassword(value);
     }
   };
 
@@ -39,6 +53,7 @@ export default function Signup({ link, setIsLoggedIn }) {
             Username
           </label>
           <input
+            onChange={handleInputChange}
             type="text"
             id="username"
             name="username"
@@ -53,6 +68,7 @@ export default function Signup({ link, setIsLoggedIn }) {
             Email
           </label>
           <input
+            onChange={handleInputChange}
             type="email"
             id="email"
             name="email"
@@ -68,6 +84,7 @@ export default function Signup({ link, setIsLoggedIn }) {
             Password
           </label>
           <input
+            onChange={handleInputChange}
             type="password"
             id="password"
             name="password"
@@ -81,6 +98,7 @@ export default function Signup({ link, setIsLoggedIn }) {
             Confirm Password
           </label>
           <input
+            onChange={handleInputChange}
             type="password"
             id="confirmPassword"
             name="confirmPassword"
