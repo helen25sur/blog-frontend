@@ -1,7 +1,8 @@
 @import "tailwindcss";
+@custom-variant hover (&:hover);
 
 .posts-list {
-  grid-template-areas: 
+  grid-template-areas:
     "post1 post2"
     "post1 post3"
     "post4 post4";
@@ -77,6 +78,7 @@
   min-width: 630px;
   max-width: 40vw;
 }
+
 .all-post-item:nth-of-type(3n) .post-container img,
 .all-post-item:first-of-type .post-container img {
   width: 100%;
@@ -97,7 +99,7 @@
 .all-post-item .post-container .post-title {
   font-size: 1.5rem;
   font-weight: 500;
-  line-height: normal;  
+  line-height: normal;
 }
 
 .all-post-item .post-container p {
@@ -106,18 +108,18 @@
 
 @media screen and (min-width: 834px) and (max-width: 1200px) {
   .posts-list {
-  grid-template-areas: 
-    "post1 post1"
-    "post2 post2"
-    "post3 post3"
-    "post4 post4";
+    grid-template-areas:
+      "post1 post1"
+      "post2 post2"
+      "post3 post3"
+      "post4 post4";
   }
 
   .post-item:nth-child(4) .post-container {
     flex-direction: column;
   }
 
-  .posts-list .post-item:nth-child(1) .post-title, 
+  .posts-list .post-item:nth-child(1) .post-title,
   .posts-list .post-item:nth-child(4) .post-title {
     font-size: 24px;
   }
@@ -135,20 +137,20 @@
   }
 }
 
-@media screen and (max-width: 833px){
+@media screen and (max-width: 833px) {
   .posts-list {
-  grid-template-areas: 
-    "post1 post1"
-    "post2 post2"
-    "post3 post3"
-    "post4 post4";
+    grid-template-areas:
+      "post1 post1"
+      "post2 post2"
+      "post3 post3"
+      "post4 post4";
   }
 
   .post-item .post-container {
     flex-direction: column;
   }
 
-  .posts-list .post-item:nth-child(1) .post-title, 
+  .posts-list .post-item:nth-child(1) .post-title,
   .posts-list .post-item:nth-child(4) .post-title {
     font-size: 24px;
   }

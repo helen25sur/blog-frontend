@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import ProfileCard from '../components/ProfileCard';
 import Loader from '../components/Loader/Loader';
 // import PostsGrid from '../components/PostsGrid';
@@ -6,16 +8,19 @@ export default function Profile({ user }) {
 
   console.log('Profile user:', user);
 
+  const navigate = useNavigate();
+
   if (!user) {
     return <Loader />;
   }
+
 
   const handleEditProfile = () => {
     // Відкриття модалки або перехід на сторінку редагування
   };
 
   const handleCreatePost = () => {
-    // Перехід на створення допису
+    navigate('/posts/add-post');
   };
 
   return (

@@ -26,7 +26,7 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost }) {
             </button>
             <button
               onClick={onCreatePost}
-              className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm font-semibold hover:bg-purple-700 transition-colors flex items-center gap-2"
+              className="px-4 py-2 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors flex items-center gap-2"
             >
               <span>+</span> New Post
             </button>
