@@ -65,12 +65,13 @@ function App() {
   };
 
   const recentPosts = [...posts].slice(-4);
+  const allPosts = [...posts].reverse();
 
   return (
     <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
       <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} />
       <Routes>
-        <Route path="/posts" element={<AllPosts posts={posts} />} />
+        <Route path="/posts" element={<AllPosts posts={allPosts} />} />
         <Route path="/posts/add-post" element={
           <FormAddPost
             title={title}
