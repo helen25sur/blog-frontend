@@ -10,6 +10,7 @@ import Navigation from './components/Navigation.jsx';
 import Home from './view/Home.jsx';
 import Login from './view/Login.jsx';
 import Signup from './view/Signup.jsx';
+import Profile from './view/Profile.jsx';
 import { checkLoginStatus } from './utils/auth.js';
 
 // const link = import.meta.env.VITE_LINK_API_URL;
@@ -21,6 +22,7 @@ function App() {
   const [imageURL, setImageURL] = useState('');
   const [content, setContent] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,6 +30,20 @@ function App() {
     fetch(`${link}`)
       .then(res => res.json())
       .then(data => setPosts(data));
+
+    fetch(`${link}current-user`, {
+      method: 'GET',
+      credentials: 'include',
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          throw new Error('Failed to fetch current user');
+        }
+      })
+      .then(user => setCurrentUser(user))
+      .catch(err => console.error("Error fetching current user:", err));
   }, []);
 
   useEffect(() => {
@@ -85,6 +101,7 @@ function App() {
         } />
         <Route path="/posts/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} setPosts={setPosts} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
+        <Route path="/profile" element={<Profile user={currentUser} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>

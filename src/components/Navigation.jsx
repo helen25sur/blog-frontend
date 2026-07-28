@@ -55,6 +55,11 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
             <NavLink className={({ isActive }) => getLinkClass(isActive)} to="/posts/add-post">Add Post</NavLink>
           </li>
         )}
+        {isLoggedIn && (
+          <li>
+            <NavLink className={({ isActive }) => getLinkClass(isActive)} to="/profile">Profile</NavLink>
+          </li>
+        )}
         {!isLoggedIn && (
           <li className="border border-solid rounded-lg ">
             <NavLink className="px-4 py-1 block w-full h-full" to="/login">Login</NavLink>
