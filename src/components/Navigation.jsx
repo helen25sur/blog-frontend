@@ -37,45 +37,49 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
     location.pathname !== '/posts/add-post';
 
   return (
-    <nav className="flex justify-between width-full mb-10 items-center">
-      <div className="logo">
-        <h2 className="font-[Inter] text-2xl font-semibold leading-7">
-          <NavLink to="/">Surilova</NavLink>
-        </h2>
-      </div>
-      <ul className="flex items-center gap-10">
-        <li>
-          <NavLink end className={({ isActive }) => getLinkClass(isActive)} to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink className={() => getLinkClass(isPostsActive)} to="/posts">Posts</NavLink>
-        </li>
-        {isLoggedIn && (
+    <>
+      <nav className="flex justify-between width-full mb-10 items-center">
+        <div className="logo">
+          <h2 className="font-[Inter] text-2xl font-semibold leading-7">
+            <NavLink to="/">Surilova</NavLink>
+          </h2>
+        </div>
+        <ul className="flex items-center gap-10">
           <li>
-            <NavLink className={({ isActive }) => getLinkClass(isActive)} to="/posts/add-post">Add Post</NavLink>
+            <NavLink end className={({ isActive }) => getLinkClass(isActive)} to="/">Home</NavLink>
           </li>
-        )}
-        {isLoggedIn && (
           <li>
-            <NavLink className={({ isActive }) => getLinkClass(isActive)} to="/profile">Profile</NavLink>
+            <NavLink className={() => getLinkClass(isPostsActive)} to="/posts">Posts</NavLink>
           </li>
-        )}
-        {!isLoggedIn && (
-          <li className="border border-solid rounded-lg ">
-            <NavLink className="px-4 py-1 block w-full h-full" to="/login">Login</NavLink>
-          </li>
-        )}
-        {!isLoggedIn && (
-          <li className="border border-solid rounded-lg">
-            <NavLink className="px-4 py-1 block w-full h-full" to="/signup">Sign Up</NavLink>
-          </li>
-        )}
-        {isLoggedIn && (
-          <li className="border border-solid rounded-lg">
-            <NavLink className="px-4 py-1 block w-full h-full" to="/logout" onClick={logoutHandler}>Logout</NavLink>
-          </li>
-        )}
-      </ul>
-    </nav>
+          {isLoggedIn && (
+            <li>
+              <NavLink className={({ isActive }) => getLinkClass(isActive)} to="/posts/add-post">Add Post</NavLink>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li>
+              <NavLink className={({ isActive }) => getLinkClass(isActive)} to="/profile">Profile</NavLink>
+            </li>
+          )}
+          {!isLoggedIn && (
+            <li className="border border-solid rounded-lg ">
+              <NavLink className="px-4 py-1 block w-full h-full" to="/login">Login</NavLink>
+            </li>
+          )}
+          {!isLoggedIn && (
+            <li className="border border-solid rounded-lg">
+              <NavLink className="px-4 py-1 block w-full h-full" to="/signup">Sign Up</NavLink>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className="border border-solid rounded-lg">
+              <NavLink className="px-4 py-1 block w-full h-full" to="/logout" onClick={logoutHandler}>Logout</NavLink>
+            </li>
+          )}
+        </ul>
+      </nav>
+      <div class="divider h-px bg-[#E4E7EC] mb-10"></div>
+    </>
+
   )
 }
