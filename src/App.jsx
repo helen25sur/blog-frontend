@@ -12,6 +12,7 @@ import Login from './view/Login.jsx';
 import Signup from './view/Signup.jsx';
 import Profile from './view/Profile.jsx';
 import { checkLoginStatus } from './utils/auth.js';
+import Footer from './components/Footer.jsx';
 
 // const link = import.meta.env.VITE_LINK_API_URL;
 const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
@@ -105,6 +106,7 @@ function App() {
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
+      <Footer />
     </div>
   )
 }
