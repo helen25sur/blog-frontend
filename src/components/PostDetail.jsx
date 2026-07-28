@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-export default function PostDetail({ link, isLoggedIn }) {
+export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
@@ -36,6 +36,13 @@ export default function PostDetail({ link, isLoggedIn }) {
       .then(res => res.json())
       .then(data => {
         setPost(data);
+
+        setPosts(prev =>
+          prev.map(item =>
+            item._id === data._id ? data : item
+          )
+        );
+
         setIsEditing(false);
       })
       .catch(err => console.error("Error:", err));

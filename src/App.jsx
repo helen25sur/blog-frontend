@@ -25,7 +25,7 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${link}all`)
+    fetch(`${link}`)
       .then(res => res.json())
       .then(data => setPosts(data));
   }, []);
@@ -83,7 +83,7 @@ function App() {
             addPost={addPost}
           />
         } />
-        <Route path="/posts/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} />} />
+        <Route path="/posts/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} setPosts={setPosts} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />

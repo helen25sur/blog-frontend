@@ -5,9 +5,6 @@ export default function Post({ post }) {
     post.updatedAt &&
     (!post.createdAt || post.createdAt !== post.updatedAt);
 
-  console.log(isEdited, post.createdAt, '8');
-  console.log(post._id, post.updatedAt, '9');
-
   const dateToShow = isEdited
     ? post.updatedAt
     : post.createdAt || post.updatedAt;
