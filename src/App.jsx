@@ -64,7 +64,7 @@ function App() {
     setImageURL('');
   };
 
-  const recentPosts = [...posts].slice(-4);
+  const recentPosts = [...posts].slice(-4).reverse();
   const allPosts = [...posts].reverse();
 
   return (
