@@ -1,10 +1,10 @@
 export default function PostCard({ post, authorName }) {
   return (
     <article className="group cursor-pointer flex flex-col">
-      {post.image && (
+      {post.imageURL && (
         <div className="overflow-hidden rounded-xl mb-5">
           <img
-            src={post.image}
+            src={post.imageURL}
             alt={post.title}
             className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
           />
@@ -12,7 +12,7 @@ export default function PostCard({ post, authorName }) {
       )}
 
       <div className="text-xs font-semibold text-purple-600 mb-2">
-        {authorName} • {post.createdAt || post.date}
+        {authorName} • {new Date(post.createdAt).toLocaleDateString("Uk-ua")}
       </div>
 
       <div className="flex justify-between items-start gap-2 mb-2">
