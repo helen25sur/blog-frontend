@@ -3,7 +3,12 @@ import { useState } from 'react';
 
 export default function FormEditProfile({ user, editProfile }) {
   const navigate = useNavigate();
-  const [localUser, setLocalUser] = useState({ ...user });
+  const [localUser, setLocalUser] = useState(user || {});
+
+  if (!user) {
+    return <p>Loading...</p>;
+  }
+
 
   const inputStyle = "py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]";
   const labelStyle = "text-sm text-[#344054] font-semibold";
@@ -41,6 +46,7 @@ export default function FormEditProfile({ user, editProfile }) {
               Save Changes
             </button>
             <button
+              type="button"
               onClick={() => navigate('/profile')}
               className={`min-w-60 ${buttonLightStyle}`}
             >
