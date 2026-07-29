@@ -78,7 +78,7 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
           )}
         </ul>
       </nav>
-      <div class="divider h-px bg-[#E4E7EC] mb-10"></div>
+      <div className="divider h-px bg-[#E4E7EC] mb-10"></div>
     </>
 
   )

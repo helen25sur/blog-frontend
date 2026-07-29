@@ -6,7 +6,7 @@ import Loader from '../components/Loader/Loader';
 
 export default function Profile({ user }) {
 
-  console.log('Profile user:', user);
+  // console.log('Profile user:', user);
 
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ export default function Profile({ user }) {
 
 
   const handleEditProfile = () => {
-    // Відкриття модалки або перехід на сторінку редагування
+    navigate('/profile/edit');
   };
 
   const handleCreatePost = () => {

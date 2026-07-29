@@ -11,6 +11,7 @@ import Home from './view/Home.jsx';
 import Login from './view/Login.jsx';
 import Signup from './view/Signup.jsx';
 import Profile from './view/Profile.jsx';
+import FormEditProfile from './components/FormEditProfile.jsx';
 import { checkLoginStatus } from './utils/auth.js';
 import Footer from './components/Footer.jsx';
 
@@ -81,9 +82,32 @@ function App() {
     setImageURL('');
   };
 
+  const handleEditProfile = (updatedUser) => {
+    event.preventDefault();
+    console.log('Updated user data:', updatedUser);
+
+    fetch(`${link}current-user`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(updatedUser)
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Failed to update profile');
+        }
+        return res.json();
+      })
+      .then(data => {
+        setCurrentUser(data);
+        navigate('/profile');
+      })
+      .catch(err => console.error("Error updating profile:", err));
+  };
+
   const recentPosts = [...posts].slice(-4).reverse();
   const allPosts = [...posts].reverse();
-
+  console.log('Current user in App.jsx:', currentUser);
   return (
     <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
       <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} />
@@ -103,6 +127,7 @@ function App() {
         <Route path="/posts/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} setPosts={setPosts} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
         <Route path="/profile" element={<Profile user={currentUser} />} />
+        <Route path="/profile/edit" element={<FormEditProfile user={currentUser} editProfile={handleEditProfile} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
       </Routes>
