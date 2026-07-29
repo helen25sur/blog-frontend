@@ -68,6 +68,11 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
     }
   };
 
+  const inputStyle = "py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]";
+  const labelStyle = "text-sm text-[#344054] font-semibold";
+  const buttonLightStyle = "px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors";
+  const buttonDarkStyle = "py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors";
+
   if (!post) return <div>Loading...</div>;
 
   if (isEditing) {
@@ -76,28 +81,28 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
         <h1 className='font-[Inter] lg:text-[98px] lg:leading-30 md:text-7xl md:leading-20 text-5xl leading-16 font-bold mb-10'>Edit Post</h1>
         <form className="font-[Inter] text-2xl mb-10 flex flex-col gap-5 ">
           <div className="form-group mb-4 flex flex-col gap-2">
-            <label className="text-sm text-[#344054] font-semibold" htmlFor="title">Post Title</label>
-            <input className="py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]" value={editTitle} id="title" name="title" onChange={e => setEditTitle(e.target.value)} placeholder="Edit Post Title" required />
+            <label className={labelStyle} htmlFor="title">Post Title</label>
+            <input className={inputStyle} value={editTitle} id="title" name="title" onChange={e => setEditTitle(e.target.value)} placeholder="Edit Post Title" required />
           </div>
 
           <div className="form-group mb-4 flex flex-col gap-2">
-            <label className="text-sm text-[#344054] font-semibold" htmlFor="imageURL">Image URL</label>
-            <input className="py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]" value={editImageURL} id="imageURL" name="imageURL" onChange={e => setEditImageURL(e.target.value)} placeholder="Image URL" required />
+            <label className={labelStyle} htmlFor="imageURL">Image URL</label>
+            <input className={inputStyle} value={editImageURL} id="imageURL" name="imageURL" onChange={e => setEditImageURL(e.target.value)} placeholder="Image URL" required />
             <span className="hint-text text-[13px] text-[#667085]">Provide a high-quality direct link to an image (Unsplash recommended)</span>
           </div>
 
           <div className="form-group mb-4 flex flex-col gap-2">
-            <label className="text-sm text-[#344054] font-semibold" htmlFor="content">Content</label>
-            <textarea className="min-h-45 py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]" name="content" value={editContent} onChange={e => setEditContent(e.target.value)} placeholder="Write your post content here... Markdown is supported." required />
+            <label className={labelStyle} htmlFor="content">Content</label>
+            <textarea className={`min-h-[180px] ${inputStyle}`} name="content" value={editContent} onChange={e => setEditContent(e.target.value)} placeholder="Write your post content here... Markdown is supported." required />
           </div>
 
           <div className="form-group mb-4 flex gap-2">
-            <button className="w-full py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors" onClick={handleSaveClick}>
+            <button className={`w-full ${buttonDarkStyle}`} onClick={handleSaveClick}>
               Save Changes
             </button>
             <button
               onClick={() => setIsEditing(false)}
-              className="min-w-60 px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
+              className={`min-w-60 ${buttonLightStyle}`}
             >
               Cancel
             </button>
