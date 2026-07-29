@@ -46,7 +46,10 @@ function App() {
           throw new Error('Failed to fetch current user');
         }
       })
-      .then(user => setCurrentUser(user))
+      .then(user => {
+        setCurrentUser(user)
+        console.log(user);
+      })
       .catch(err => console.error("Error fetching current user:", err));
   }, []);
 

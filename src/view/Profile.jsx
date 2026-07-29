@@ -36,6 +36,7 @@ export default function Profile({ user, posts }) {
 
       <ProfileCard
         user={user}
+        countPost={posts.length}
         onEditProfile={handleEditProfile}
         onCreatePost={handleCreatePost}
       />

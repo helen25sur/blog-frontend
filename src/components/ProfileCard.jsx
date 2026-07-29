@@ -1,6 +1,6 @@
 import ProfileStats from './ProfileStats';
 
-export default function ProfileCard({ user, onEditProfile, onCreatePost }) {
+export default function ProfileCard({ user, onEditProfile, onCreatePost, countPost }) {
   // if (!user) return null;
 
   return (
@@ -39,7 +39,11 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost }) {
           </p>
         )}
 
-        <ProfileStats stats={user.stats} />
+        <ProfileStats countPost={countPost} joinedDate={new Date(user.createdAt).toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })} />
       </div>
     </div>
   );
