@@ -12,12 +12,12 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost }) {
       />
 
       <div className="flex-grow w-full">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{user.userName}</h2>
-            <p className="text-sm text-gray-500 mt-1">{user.email}</p>
+            <p className="text-sm text-[#667085] mt-1">{user.email}</p>
           </div>
-          <div className="flex gap-3">
+          <div className="mr-auto flex gap-3 flex-wrap">
             <button
               onClick={onEditProfile}
               className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
@@ -34,7 +34,7 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost }) {
         </div>
 
         {user.bio && (
-          <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-2xl mb-6">
+          <p className="text-sm md:text-base text-[#475467] leading-relaxed max-w-2xl mb-6">
             {user.bio}
           </p>
         )}

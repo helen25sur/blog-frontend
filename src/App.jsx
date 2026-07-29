@@ -31,7 +31,8 @@ function App() {
   useEffect(() => {
     fetch(`${link}`)
       .then(res => res.json())
-      .then(data => setPosts(data));
+      .then(data => setPosts(data))
+      .catch(err => console.error("Error fetching posts:", err));
 
     fetch(`${link}current-user`, {
       method: 'GET',
@@ -47,6 +48,8 @@ function App() {
       .then(user => setCurrentUser(user))
       .catch(err => console.error("Error fetching current user:", err));
   }, []);
+
+  console.log('Current posts in App.jsx:', posts);
 
   useEffect(() => {
     checkLoginStatus(link, setIsLoggedIn);
@@ -84,7 +87,7 @@ function App() {
 
   const handleEditProfile = (updatedUser) => {
     event.preventDefault();
-    console.log('Updated user data:', updatedUser);
+    // console.log('Updated user data:', updatedUser);
 
     fetch(`${link}current-user`, {
       method: 'PUT',
@@ -107,7 +110,8 @@ function App() {
 
   const recentPosts = [...posts].slice(-4).reverse();
   const allPosts = [...posts].reverse();
-  console.log('Current user in App.jsx:', currentUser);
+  const postsCurrentUser = [...posts].filter(post => post.userId?._id === currentUser?._id);
+
   return (
     <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
       <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} />
@@ -126,7 +130,7 @@ function App() {
         } />
         <Route path="/posts/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} setPosts={setPosts} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
-        <Route path="/profile" element={<Profile user={currentUser} />} />
+        <Route path="/profile" element={<Profile user={currentUser} posts={postsCurrentUser} />} />
         <Route path="/profile/edit" element={<FormEditProfile user={currentUser} editProfile={handleEditProfile} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />

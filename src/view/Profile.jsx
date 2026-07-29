@@ -2,9 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 import ProfileCard from '../components/ProfileCard';
 import Loader from '../components/Loader/Loader';
-// import PostsGrid from '../components/PostsGrid';
+import PostsGrid from '../components/PostsGrid';
 
-export default function Profile({ user }) {
+export default function Profile({ user, posts }) {
 
   // console.log('Profile user:', user);
 
@@ -42,11 +42,11 @@ export default function Profile({ user }) {
 
       <div className="flex justify-between items-center mb-8 border-b border-gray-200 pb-4">
         <h3 className="text-xl font-bold text-gray-900">
-          {/* Recent Posts ({posts.length}) */}
+          Recent Posts ({posts.length})
         </h3>
       </div>
 
-      {/* <PostsGrid posts={posts} authorName={user?.userName} /> */}
+      <PostsGrid posts={posts} authorName={user?.userName} />
     </div>
   );
 }

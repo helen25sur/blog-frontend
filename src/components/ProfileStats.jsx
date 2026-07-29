@@ -4,7 +4,6 @@ export default function ProfileStats({ stats }) {
   const statItems = [
     { label: 'Published Posts', value: stats.postsCount },
     { label: 'Total Views', value: stats.totalViews },
-    { label: 'Bookmarks', value: stats.bookmarks },
     { label: 'Member Since', value: stats.joinedDate },
   ];
 
