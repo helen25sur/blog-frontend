@@ -73,13 +73,18 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const buttonLightStyle = "px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors";
   const buttonDarkStyle = "py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors";
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleSaveClick(event);
+  }
+
   if (!post) return <div>Loading...</div>;
 
   if (isEditing) {
     return (
       <>
         <h1 className='font-[Inter] lg:text-[98px] lg:leading-30 md:text-7xl md:leading-20 text-5xl leading-16 font-bold mb-10'>Edit Post</h1>
-        <form className="font-[Inter] text-2xl mb-10 flex flex-col gap-5 ">
+        <form className="font-[Inter] text-2xl mb-10 flex flex-col gap-5 " onSubmit={handleSubmit}>
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="title">Post Title</label>
             <input className={inputStyle} value={editTitle} id="title" name="title" onChange={e => setEditTitle(e.target.value)} placeholder="Edit Post Title" required />
@@ -97,7 +102,7 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
           </div>
 
           <div className="form-group mb-4 flex gap-2">
-            <button className={`w-full ${buttonDarkStyle}`} onClick={handleSaveClick}>
+            <button type="submit" className={`w-full ${buttonDarkStyle}`}>
               Save Changes
             </button>
             <button

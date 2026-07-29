@@ -56,8 +56,7 @@ function App() {
     checkLoginStatus(link, setIsLoggedIn);
   }, []);
 
-  const addPost = (event) => {
-    event.preventDefault();
+  const addPost = () => {
     fetch(`${link}posts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

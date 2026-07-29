@@ -10,11 +10,16 @@ export default function FormEditProfile({ user, editProfile }) {
   const buttonDarkStyle = "py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors";
   const buttonLightStyle = "px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors";
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    editProfile(localUser);
+  }
+
   return (
     <>
       <h1 className='font-[Inter] lg:text-[96px] lg:leading-30 md:text-7xl md:leading-20 text-5xl leading-16 font-bold mt-5 mb-8 tracking-[-2px]'>Edit Profile</h1>
       <div className="form-container max-w-220 mb-15">
-        <form className="font-[Inter] text-2xl mb-10 flex flex-col ">
+        <form className="font-[Inter] text-2xl mb-10 flex flex-col " onSubmit={handleSubmit}>
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="userName">Username</label>
             <input className={inputStyle} value={localUser?.userName} id="userName" name="userName" onChange={e => setLocalUser({ ...localUser, userName: e.target.value })} placeholder="Enter Username" required />
@@ -32,7 +37,7 @@ export default function FormEditProfile({ user, editProfile }) {
             <input className={inputStyle} value={localUser?.avatarUrl} id="avatarUrl" name="avatarUrl" onChange={e => setLocalUser({ ...localUser, avatarUrl: e.target.value })} placeholder="Enter Avatar URL" />
           </div>
           <div className="form-group mb-4 flex gap-2">
-            <button className={`w-full ${buttonDarkStyle}`} onClick={() => editProfile(localUser)}>
+            <button className={`w-full ${buttonDarkStyle}`} type="submit">
               Save Changes
             </button>
             <button
