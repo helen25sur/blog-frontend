@@ -14,6 +14,7 @@ import Profile from './view/Profile.jsx';
 import FormEditProfile from './components/FormEditProfile.jsx';
 import { checkLoginStatus } from './utils/auth.js';
 import Footer from './components/Footer.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 // const link = import.meta.env.VITE_LINK_API_URL;
 const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
@@ -115,6 +116,7 @@ function App() {
   return (
     <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
       <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} />
+      <ScrollToTop />
       <Routes>
         <Route path="/posts" element={<AllPosts posts={allPosts} />} />
         <Route path="/posts/add-post" element={
