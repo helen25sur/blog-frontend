@@ -13,6 +13,7 @@ import Signup from './view/Signup.jsx';
 import Profile from './view/Profile.jsx';
 import FormEditProfile from './components/FormEditProfile.jsx';
 import { checkLoginStatus } from './utils/auth.js';
+import { initCsrf, apiFetch } from './utils/api.js';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 
@@ -30,12 +31,14 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${link}`)
+    initCsrf(link);
+
+    apiFetch(`${link}`)
       .then(res => res.json())
       .then(data => setPosts(data))
       .catch(err => console.error("Error fetching posts:", err));
 
-    fetch(`${link}current-user`, {
+    apiFetch(`${link}current-user`, {
       method: 'GET',
       credentials: 'include',
     })
@@ -48,19 +51,19 @@ function App() {
       })
       .then(user => {
         setCurrentUser(user)
-        console.log(user);
+        // console.log(user);
       })
       .catch(err => console.error("Error fetching current user:", err));
   }, []);
 
-  console.log('Current posts in App.jsx:', posts);
+  // console.log('Current posts in App.jsx:', posts);
 
   useEffect(() => {
     checkLoginStatus(link, setIsLoggedIn);
   }, []);
 
   const addPost = () => {
-    fetch(`${link}posts`, {
+    apiFetch(`${link}posts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -92,7 +95,7 @@ function App() {
     event.preventDefault();
     // console.log('Updated user data:', updatedUser);
 
-    fetch(`${link}current-user`, {
+    apiFetch(`${link}current-user`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

@@ -1,4 +1,5 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { apiFetch } from "../utils/api";
 
 export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
   // console.log(isLoggedIn);
@@ -8,7 +9,7 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
   const logoutHandler = async () => {
     setIsLoggedIn(false);
     try {
-      const response = await fetch(`${link}logout`, {
+      const response = await apiFetch(`${link}logout`, {
         method: 'POST',
         // Обов'язково для передачі сесійної куки, щоб сервер знав, кого розлогінювати
         credentials: 'include',

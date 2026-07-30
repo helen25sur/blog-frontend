@@ -1,11 +1,11 @@
+import { apiFetch } from "./api";
+
 export const checkLoginStatus = async (link, setIsLoggedIn) => {
   try {
-    const response = await fetch(`${link}status`, {
+    const response = await apiFetch(`${link}status`, {
       method: 'GET',
       credentials: 'include', // Обов'язково для передачі сесійної куки
     });
-
-    console.log('8', response);
 
     if (response.ok) {
       const data = await response.json();
@@ -22,7 +22,7 @@ export const checkLoginStatus = async (link, setIsLoggedIn) => {
 }
 
 export async function authRequest(link, endpoint, body) {
-  const response = await fetch(`${link}${endpoint}`, {
+  const response = await apiFetch(`${link}${endpoint}`, {
     method: 'POST',
     credentials: 'include',
     headers: { 'Content-Type': 'application/json' },

@@ -25,7 +25,7 @@ export default function FormAddPost({ title, setTitle, imageURL, setImageURL, co
           </div>
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="content">Content</label>
-            <textarea className={`min-h-[180px] ${inputStyle}`} name="content" value={content} onChange={e => setContent(e.target.value)} placeholder="Write your post content here... Markdown is supported." required />
+            <textarea className={`min-h-45 ${inputStyle}`} name="content" value={content} onChange={e => setContent(e.target.value)} placeholder="Write your post content here... Markdown is supported." required />
           </div>
           <button type="submit" className={buttonDarkStyle}>
             Add Post
