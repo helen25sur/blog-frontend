@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 
 import Posts from './components/Posts.jsx';
@@ -13,7 +13,7 @@ import Signup from './view/Signup.jsx';
 import Profile from './view/Profile.jsx';
 import FormEditProfile from './components/FormEditProfile.jsx';
 import { checkLoginStatus } from './services/auth.js';
-import { initCsrf, apiFetch } from './utils/api.js';
+import { apiFetch } from './utils/api.js';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 
@@ -31,29 +31,32 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    initCsrf(link);
-
     apiFetch(`${link}`)
       .then(res => res.json())
       .then(data => setPosts(data))
       .catch(err => console.error("Error fetching posts:", err));
+  }, []);
 
-    apiFetch(`${link}current-user`, {
-      method: 'GET',
-      credentials: 'include',
-    })
+  useEffect(() => {
+    apiFetch(`${link}current-user`)
       .then(res => {
-        if (res.ok) {
-          return res.json();
-        } else {
-          throw new Error('Failed to fetch current user');
+        if (res.status === 401) {
+          setCurrentUser(null);
+          return;
         }
+
+        if (!res.ok) {
+          throw new Error("Server error");
+        }
+
+        return res.json();
       })
       .then(user => {
-        setCurrentUser(user)
-        // console.log(user);
+        setCurrentUser(user);
       })
-      .catch(err => console.error("Error fetching current user:", err));
+      .catch(err => {
+        console.error("Error fetching current user:", err);
+      });
   }, []);
 
   // console.log('Current posts in App.jsx:', posts);
@@ -137,7 +140,7 @@ function App() {
         } />
         <Route path="/posts/:id" element={<PostDetail link={link} isLoggedIn={isLoggedIn} setPosts={setPosts} />} />
         <Route path="/" element={<Home posts={recentPosts} />} />
-        <Route path="/profile" element={<Profile user={currentUser} posts={postsCurrentUser} />} />
+        <Route path="/profile" element={currentUser ? <Profile user={currentUser} posts={postsCurrentUser} /> : <Navigate to="/login" />} />
         <Route path="/profile/edit" element={<FormEditProfile user={currentUser} editProfile={handleEditProfile} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
