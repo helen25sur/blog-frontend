@@ -14,7 +14,7 @@ export async function apiFetch(url, options = {}) {
   }
 
   const csrfToken = await csrfTokenPromise;
-
+  // console.log("Sending CSRF:", csrfToken);
   return fetch(url, {
     credentials: "include",
     ...options,

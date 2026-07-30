@@ -98,7 +98,7 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
 
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="content">Content</label>
-            <textarea className={`min-h-[180px] ${inputStyle}`} name="content" value={editContent} onChange={e => setEditContent(e.target.value)} placeholder="Write your post content here... Markdown is supported." required />
+            <textarea className={`min-h-45 ${inputStyle}`} name="content" value={editContent} onChange={e => setEditContent(e.target.value)} placeholder="Write your post content here... Markdown is supported." required />
           </div>
 
           <div className="form-group mb-4 flex gap-2">

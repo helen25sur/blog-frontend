@@ -6,6 +6,7 @@ import AuthLayout from '../components/AuthLayout';
 export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -29,6 +30,7 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
       navigate('/');
     } catch (err) {
       console.error('Login error:', err);
+      setError(err.message);
     }
   };
 
@@ -40,6 +42,12 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
       footerLinkText="Sign up"
       footerLinkHref="/signup"
     >
+
+      {error && (
+        <p className="text-red-600 text-sm mb-4">
+          {error}
+        </p>
+      )}
 
       <form
         onSubmit={handleSubmit}
