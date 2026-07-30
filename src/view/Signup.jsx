@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkLoginStatus, authRequest } from '../utils/auth';
+import { checkLoginStatus, authRequest } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
 
 export default function Signup({ link, setIsLoggedIn }) {

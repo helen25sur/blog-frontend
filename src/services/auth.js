@@ -1,10 +1,10 @@
-import { apiFetch } from "./api";
+import { apiFetch } from "../utils/api";
 
 export const checkLoginStatus = async (link, setIsLoggedIn) => {
   try {
     const response = await apiFetch(`${link}status`, {
       method: 'GET',
-      credentials: 'include', // Обов'язково для передачі сесійної куки
+      credentials: 'include',
     });
 
     if (response.ok) {
@@ -31,6 +31,31 @@ export async function authRequest(link, endpoint, body) {
 
   if (!response.ok) {
     throw new Error(`Error: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function login(link, email, password) {
+  const response = await apiFetch(`${link}login`, {
+    method: 'POST',
+    body: JSON.stringify({ email, password })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Login error: ${response.status}`);
+  }
+
+  return response.json();
+}
+
+export async function logout(link) {
+  const response = await apiFetch(`${link}logout`, {
+    method: 'POST'
+  });
+
+  if (!response.ok) {
+    throw new Error(`Logout error: ${response.status}`);
   }
 
   return response.json();

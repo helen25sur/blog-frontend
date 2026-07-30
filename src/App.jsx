@@ -12,7 +12,7 @@ import Login from './view/Login.jsx';
 import Signup from './view/Signup.jsx';
 import Profile from './view/Profile.jsx';
 import FormEditProfile from './components/FormEditProfile.jsx';
-import { checkLoginStatus } from './utils/auth.js';
+import { checkLoginStatus } from './services/auth.js';
 import { initCsrf, apiFetch } from './utils/api.js';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
@@ -139,8 +139,9 @@ function App() {
         <Route path="/" element={<Home posts={recentPosts} />} />
         <Route path="/profile" element={<Profile user={currentUser} posts={postsCurrentUser} />} />
         <Route path="/profile/edit" element={<FormEditProfile user={currentUser} editProfile={handleEditProfile} />} />
-        <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/logout' element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}></Route>
       </Routes>
       <Footer />
     </div>

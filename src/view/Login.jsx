@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkLoginStatus, authRequest } from '../utils/auth';
+import { login } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
 
-export default function Login({ link, setIsLoggedIn }) {
+export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,13 +19,13 @@ export default function Login({ link, setIsLoggedIn }) {
   };
 
   const handleSubmit = async (event) => {
-
     event.preventDefault();
-    console.log('in handleSubmit')
+
     try {
-      await authRequest(link, 'login', { email, password });
+      const data = await login(link, email, password);
       setIsLoggedIn(true);
-      await checkLoginStatus(link, setIsLoggedIn);
+      setCurrentUser(data.userFound)
+      console.log(data);
       navigate('/');
     } catch (err) {
       console.error('Login error:', err);
