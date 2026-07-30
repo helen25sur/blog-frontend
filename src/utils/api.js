@@ -1,3 +1,9 @@
+// CSRF:
+// initCsrf() запускається перед apiFetch
+// apiFetch чекає csrfTokenPromise
+// credentials include обов'язковий
+// csrf middleware після session
+
 let csrfTokenPromise = null;
 
 export function initCsrf(link) {
@@ -5,7 +11,7 @@ export function initCsrf(link) {
     credentials: "include",
   })
     .then(res => res.json())
-    .then(data => data.csrfToken);
+    .then(data => (data.csrfToken));
 }
 
 export async function apiFetch(url, options = {}) {
@@ -14,7 +20,7 @@ export async function apiFetch(url, options = {}) {
   }
 
   const csrfToken = await csrfTokenPromise;
-  // console.log("Sending CSRF:", csrfToken);
+
   return fetch(url, {
     credentials: "include",
     ...options,
