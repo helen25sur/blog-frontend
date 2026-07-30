@@ -8,10 +8,10 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost, countPo
       <img
         src={user.avatarUrl || '/default-avatar.png'}
         alt={user.userName}
-        className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md flex-shrink-0"
+        className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md shrink-0"
       />
 
-      <div className="flex-grow w-full">
+      <div className="grow w-full">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
           <div>
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{user.userName}</h2>

@@ -5,6 +5,8 @@ export const checkLoginStatus = async (link, setIsLoggedIn) => {
       credentials: 'include', // Обов'язково для передачі сесійної куки
     });
 
+    console.log('8', response);
+
     if (response.ok) {
       const data = await response.json();
       console.log('Login status:', data);
@@ -13,6 +15,7 @@ export const checkLoginStatus = async (link, setIsLoggedIn) => {
       setIsLoggedIn(false);
     }
   } catch (err) {
+    console.log(err);
     console.error('Error checking login status:', err);
     setIsLoggedIn(false);
   }

@@ -6,8 +6,6 @@ import PostsGrid from '../components/PostsGrid';
 
 export default function Profile({ user, posts }) {
 
-  // console.log('Profile user:', user);
-
   const navigate = useNavigate();
 
   if (!user) {

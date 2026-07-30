@@ -35,7 +35,7 @@ export default function FormEditProfile({ user, editProfile }) {
           </div>
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="bio">Bio</label>
-            <textarea className={`min-h-[180px] ${inputStyle}`} value={localUser?.bio} id="bio" name="bio" onChange={e => setLocalUser({ ...localUser, bio: e.target.value })} placeholder="Enter Bio" />
+            <textarea className={`min-h-45 ${inputStyle}`} value={localUser?.bio} id="bio" name="bio" onChange={e => setLocalUser({ ...localUser, bio: e.target.value })} placeholder="Enter Bio" />
           </div>
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="avatarUrl">Avatar URL</label>

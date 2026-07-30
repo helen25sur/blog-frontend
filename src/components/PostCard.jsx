@@ -24,7 +24,7 @@ export default function PostCard({ post, authorName }) {
         </span>
       </div>
 
-      <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-grow line-clamp-2">
+      <p className="text-sm text-gray-500 leading-relaxed mb-4 grow line-clamp-2">
         {post.excerpt || post.description}
       </p>
 
