@@ -1,7 +1,8 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
   // console.log(isLoggedIn);
+  const navigate = useNavigate();
   const location = useLocation();
 
   const logoutHandler = async () => {
@@ -18,8 +19,7 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
 
       if (response.ok) {
         // Очищуємо локальний стейт (наприклад, context або redux)
-        // І перенаправляємо на головну або сторінку логіну
-        window.location.href = '/login'; // use navigate('/') if using react-router's useNavigate
+        navigate('/login');
       }
     } catch (err) {
       console.error('Logout error:', err);
