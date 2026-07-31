@@ -6,6 +6,10 @@
 
 let csrfTokenPromise = null;
 
+export function resetCsrf() {
+  csrfTokenPromise = null;
+}
+
 export function initCsrf(link) {
   if (!csrfTokenPromise) {
     csrfTokenPromise = fetch(`${link}csrf-token`, {

@@ -12,13 +12,13 @@ import Login from './view/Login.jsx';
 import Signup from './view/Signup.jsx';
 import Profile from './view/Profile.jsx';
 import FormEditProfile from './components/FormEditProfile.jsx';
-import { checkLoginStatus } from './services/auth.js';
 import { apiFetch } from './utils/api.js';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
+import Loader from './components/Loader/Loader.jsx';
 
-const link = import.meta.env.VITE_LINK_API_URL;
-// const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
+// const link = import.meta.env.VITE_LINK_API_URL;
+const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -27,6 +27,7 @@ function App() {
   const [content, setContent] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(true);
 
   console.log('currentUser', currentUser);
 
@@ -40,31 +41,39 @@ function App() {
   }, []);
 
   useEffect(() => {
-    apiFetch(`${link}current-user`)
-      .then(res => {
-        if (res.status === 401) {
+    async function initializeAuth() {
+      try {
+        const statusRes = await apiFetch(`${link}status`);
+
+        const status = await statusRes.json();
+        console.log(status);
+
+        setIsLoggedIn(status.isAuthenticated);
+
+        if (!status.isAuthenticated) {
           setCurrentUser(null);
           return;
         }
 
-        if (!res.ok) {
-          throw new Error("Server error");
+        const userRes = await apiFetch(`${link}current-user`);
+
+        if (!userRes.ok) {
+          throw new Error("Failed to fetch current user");
         }
 
-        return res.json();
-      })
-      .then(user => {
+        const user = await userRes.json();
         setCurrentUser(user);
-      })
-      .catch(err => {
-        console.error("Error fetching current user:", err);
-      });
-  }, []);
 
-  // console.log('Current posts in App.jsx:', posts);
+      } catch (err) {
+        console.error(err);
+        setIsLoggedIn(false);
+        setCurrentUser(null);
+      } finally {
+        setIsAuthLoading(false);
+      }
+    }
 
-  useEffect(() => {
-    checkLoginStatus(link, setIsLoggedIn);
+    initializeAuth();
   }, []);
 
   const addPost = () => {
@@ -122,9 +131,13 @@ function App() {
   const allPosts = [...posts].reverse();
   const postsCurrentUser = [...posts].filter(post => post.userId?._id === currentUser?._id);
 
+  if (isAuthLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className='container max-w-355 px-8 py-12.5  md:px-8 md:py-15 lg:px-28 lg:py-7.5 mx-auto'>
-      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} />
+      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} link={link} setCurrentUser={setCurrentUser} />
       <ScrollToTop />
       <Routes>
         <Route path="/posts" element={<AllPosts posts={allPosts} />} />

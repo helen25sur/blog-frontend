@@ -1,7 +1,7 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { apiFetch } from "../utils/api";
+import { apiFetch, initCsrf, resetCsrf } from "../utils/api";
 
-export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
+export default function Navigation({ isLoggedIn, setIsLoggedIn, link, setCurrentUser }) {
   // console.log(isLoggedIn);
   const navigate = useNavigate();
   const location = useLocation();
@@ -11,15 +11,14 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link }) {
     try {
       const response = await apiFetch(`${link}logout`, {
         method: 'POST',
-        // Обов'язково для передачі сесійної куки, щоб сервер знав, кого розлогінювати
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
       });
 
       if (response.ok) {
         // Очищуємо локальний стейт (наприклад, context або redux)
+        resetCsrf();
+        await initCsrf(link);
+        setIsLoggedIn(false);
+        setCurrentUser(null);
         navigate('/login');
       }
     } catch (err) {
