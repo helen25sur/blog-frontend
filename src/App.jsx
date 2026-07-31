@@ -28,6 +28,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
 
+  console.log('currentUser', currentUser);
+
   const navigate = useNavigate();
 
   useEffect(() => {

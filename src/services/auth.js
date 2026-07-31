@@ -41,11 +41,13 @@ export async function login(link, email, password) {
     body: JSON.stringify({ email, password })
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error(`Login error: ${response.status}`);
+    throw new Error(data.message);
   }
 
-  return response.json();
+  return data;
 }
 
 export async function logout(link) {

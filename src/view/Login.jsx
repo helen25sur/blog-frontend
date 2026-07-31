@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
+import Error from '../components/Error';
 
 export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
   const [email, setEmail] = useState('');
@@ -25,7 +26,7 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
     try {
       const data = await login(link, email, password);
       setIsLoggedIn(true);
-      setCurrentUser(data.userFound)
+      setCurrentUser(data.user)
       console.log(data);
       navigate('/');
     } catch (err) {
@@ -44,9 +45,9 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
     >
 
       {error && (
-        <p className="text-red-600 text-sm mb-4">
-          {error}
-        </p>
+        <Error>
+          <span>{error}</span>
+        </Error>
       )}
 
       <form
