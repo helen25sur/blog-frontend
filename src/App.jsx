@@ -95,7 +95,6 @@ function App() {
   };
 
   const handleEditProfile = (updatedUser) => {
-    event.preventDefault();
     // console.log('Updated user data:', updatedUser);
 
     apiFetch(`${link}current-user`, {

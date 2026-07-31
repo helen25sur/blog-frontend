@@ -9,12 +9,12 @@ export default function Post({ post }) {
     ? post.updatedAt
     : post.createdAt || post.updatedAt;
 
-  return <div className="post-container flex gap-6">
+  return <div className="post-container flex col-2 gap-6 w-full">
     <div className="post-image-container">
       {post.imageURL ? <img src={post.imageURL} alt={post.title} /> : null}
     </div>
     <div className="post-content-container">
-      <h3 className="post-title">
+      <h3 className="post-title line-clamp-2">
         <Link to={`/posts/${post._id}`}>
           {post.title}</Link>
       </h3>
@@ -34,7 +34,7 @@ export default function Post({ post }) {
         </span>
       )}
 
-      <p>{post.content}</p>
+      <p className="line-clamp-3">{String(post.content).slice(0, 120)}...</p>
     </div>
   </div>
 }

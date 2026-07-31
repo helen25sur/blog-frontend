@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { apiFetch } from '../utils/api';
 
 export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const { id } = useParams();
@@ -11,7 +12,7 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const [editImageURL, setEditImageURL] = useState('')
 
   useEffect(() => {
-    fetch(`${link}posts/${id}`)
+    apiFetch(`${link}posts/${id}`)
       .then(res => res.json())
       .then(data => {
         setPost(data);
@@ -23,7 +24,7 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
 
   const handleSaveClick = (event) => {
     event.preventDefault();
-    fetch(`${link}posts/post-edit/${id}`, {
+    apiFetch(`${link}posts/post-edit/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -52,7 +53,7 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
 
   const deletePost = () => {
     if (confirm('Do you want to delete this post?')) {
-      fetch(`${link}posts/post-delete/${id}`, {
+      apiFetch(`${link}posts/post-delete/${id}`, {
         method: 'DELETE',
         credentials: 'include',
       })
