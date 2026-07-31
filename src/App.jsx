@@ -17,8 +17,8 @@ import { apiFetch } from './utils/api.js';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 
-// const link = import.meta.env.VITE_LINK_API_URL;
-const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
+const link = import.meta.env.VITE_LINK_API_URL;
+// const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
 
 function App() {
   const [posts, setPosts] = useState([]);
