@@ -144,7 +144,7 @@ function App() {
         <Route path="/profile" element={currentUser ? <Profile user={currentUser} posts={postsCurrentUser} /> : <Navigate to="/login" />} />
         <Route path="/profile/edit" element={<FormEditProfile user={currentUser} editProfile={handleEditProfile} />} />
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />} />
-        <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />} />
         <Route path='/logout' element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}></Route>
       </Routes>
       <Footer />

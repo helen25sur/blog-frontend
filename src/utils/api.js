@@ -7,11 +7,15 @@
 let csrfTokenPromise = null;
 
 export function initCsrf(link) {
-  csrfTokenPromise = fetch(`${link}csrf-token`, {
-    credentials: "include",
-  })
-    .then(res => res.json())
-    .then(data => (data.csrfToken));
+  if (!csrfTokenPromise) {
+    csrfTokenPromise = fetch(`${link}csrf-token`, {
+      credentials: "include",
+    })
+      .then(res => res.json())
+      .then(data => data.csrfToken);
+  }
+
+  return csrfTokenPromise;
 }
 
 export async function apiFetch(url, options = {}) {
@@ -20,7 +24,9 @@ export async function apiFetch(url, options = {}) {
   }
 
   const csrfToken = await csrfTokenPromise;
-
+  console.log("URL:", url);
+  console.log("METHOD:", options.method);
+  console.log("CSRF:", csrfToken);
   return fetch(url, {
     credentials: "include",
     ...options,

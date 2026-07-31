@@ -9,7 +9,7 @@ export const checkLoginStatus = async (link, setIsLoggedIn) => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('Login status:', data);
+      console.log("STATUS RESPONSE", data);
       setIsLoggedIn(data.isAuthenticated);
     } else {
       setIsLoggedIn(false);
@@ -39,6 +39,21 @@ export async function login(link, email, password) {
   const response = await apiFetch(`${link}login`, {
     method: 'POST',
     body: JSON.stringify({ email, password })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
+}
+
+export async function signup(link, body) {
+  const response = await apiFetch(`${link}signup`, {
+    method: 'POST',
+    body: JSON.stringify(body)
   });
 
   const data = await response.json();

@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { checkLoginStatus, authRequest } from '../services/auth';
+import { checkLoginStatus, signup } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
+import Error from '../components/Error';
 
-export default function Signup({ link, setIsLoggedIn }) {
+export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await authRequest(link, 'signup', { username, email, password, confirmPassword });
-      setIsLoggedIn(true);
+      const data = await signup(link, { username, email, password, confirmPassword });
       await checkLoginStatus(link, setIsLoggedIn);
+      setIsLoggedIn(true);
+      setCurrentUser(data.user);
       navigate('/');
-    } catch (err) {
-      console.error('Signup error:', err);
+    } catch (error) {
+      setError(error.message);
+      console.error('Signup error:', error);
     }
   };
 
@@ -44,6 +48,12 @@ export default function Signup({ link, setIsLoggedIn }) {
       footerLinkText="Log in"
       footerLinkHref="/login"
     >
+
+      {error && (
+        <Error>
+          <span>{error}</span>
+        </Error>
+      )}
 
       <form onSubmit={handleSubmit}
         className="space-y-6">
