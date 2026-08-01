@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 import { postNewPassword } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
-import Error from '../components/Error';
+import ErrorMessage from '../components/Error';
 
 export default function NewPassword({ link }) {
   const [password, setPassword] = useState('');
@@ -33,7 +33,7 @@ export default function NewPassword({ link }) {
       navigate('/login');
     } catch (err) {
       console.error('New password error:', err);
-      setError(err.message);
+      setError(err.message || "An error occurred while setting the new password.");
     }
   };
 
@@ -44,9 +44,9 @@ export default function NewPassword({ link }) {
     >
 
       {error && (
-        <Error>
+        <ErrorMessage>
           <span>{error}</span>
-        </Error>
+        </ErrorMessage>
       )}
 
       <form

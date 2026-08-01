@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkLoginStatus, signup } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
-import Error from '../components/Error';
+import ErrorMessage from '../components/Error';
 
 export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
   const [username, setUsername] = useState('');
@@ -50,9 +50,9 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
     >
 
       {error && (
-        <Error>
+        <ErrorMessage>
           <span>{error}</span>
-        </Error>
+        </ErrorMessage>
       )}
 
       <form onSubmit={handleSubmit}

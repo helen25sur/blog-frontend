@@ -31,7 +31,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
-  console.log('currentUser', currentUser);
+  // console.log('currentUser', currentUser);
 
   const navigate = useNavigate();
 

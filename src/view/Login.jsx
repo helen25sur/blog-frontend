@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
-import Error from '../components/Error';
+import ErrorMessage from '../components/Error';
 
 export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
   const [email, setEmail] = useState('');
@@ -45,9 +45,9 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
     >
 
       {error && (
-        <Error>
+        <ErrorMessage>
           <span>{error}</span>
-        </Error>
+        </ErrorMessage>
       )}
 
       <form

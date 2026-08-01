@@ -28,9 +28,6 @@ export async function apiFetch(url, options = {}) {
   }
 
   const csrfToken = await csrfTokenPromise;
-  console.log("URL:", url);
-  console.log("METHOD:", options.method);
-  console.log("CSRF:", csrfToken);
   return fetch(url, {
     credentials: "include",
     ...options,

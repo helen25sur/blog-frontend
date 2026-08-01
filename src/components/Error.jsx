@@ -1,4 +1,4 @@
-export default function Error({ children }) {
+export default function ErrorMessage({ children }) {
   return (
     <div className="flex items-center gap-2.5 px-4 py-3 mb-5 bg-red-50 border border-red-200 border-l-4 border-l-red-600 text-red-700 text-sm font-medium" role="alert">
       <svg className="w-5 h-5 shrink-0 text-red-600" viewBox="0 0 20 20" fill="none">

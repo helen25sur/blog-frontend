@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { reset } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
-import Error from '../components/Error';
+import ErrorMessage from '../components/Error';
 
 export default function Reset({ link }) {
   const [email, setEmail] = useState('');
@@ -40,9 +40,9 @@ export default function Reset({ link }) {
     >
 
       {error && (
-        <Error>
+        <ErrorMessage>
           <span>{error}</span>
-        </Error>
+        </ErrorMessage>
       )}
 
       <form

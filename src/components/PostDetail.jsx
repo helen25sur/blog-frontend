@@ -2,6 +2,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../utils/api';
 
+import ErrorMessage from './Error.jsx';
+
 export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -9,7 +11,8 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
   const [editContent, setEditContent] = useState('');
-  const [editImageURL, setEditImageURL] = useState('')
+  const [editImageURL, setEditImageURL] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     apiFetch(`${link}posts/${id}`)
@@ -22,31 +25,41 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
       });
   }, [id, link]);
 
-  const handleSaveClick = (event) => {
+  const handleSaveClick = async (event) => {
     event.preventDefault();
-    apiFetch(`${link}posts/post-edit/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({
-        title: editTitle,
-        content: editContent,
-        imageURL: editImageURL
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        setPost(data);
 
-        setPosts(prev =>
-          prev.map(item =>
-            item._id === data._id ? data : item
-          )
-        );
+    try {
+      const res = await apiFetch(`${link}posts/post-edit/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({
+          title: editTitle,
+          content: editContent,
+          imageURL: editImageURL
+        })
+      });
 
-        setIsEditing(false);
-      })
-      .catch(err => console.error("Error:", err));
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to update post");
+      }
+
+      setPost(data);
+
+      setPosts(prev =>
+        prev.map(item =>
+          item._id === data._id ? data : item
+        )
+      );
+
+      setIsEditing(false);
+
+    } catch (err) {
+      console.error("Update error:", err);
+      setError(err.message);
+    }
   };
 
   const navigate = useNavigate();
@@ -112,8 +125,14 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
             >
               Cancel
             </button>
+
           </div>
         </form>
+        {error && (
+          <ErrorMessage>
+            {error}
+          </ErrorMessage>
+        )}
       </>
     );
   }
