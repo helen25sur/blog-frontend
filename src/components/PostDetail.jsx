@@ -64,23 +64,28 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
 
   const navigate = useNavigate();
 
-  const deletePost = () => {
-    if (confirm('Do you want to delete this post?')) {
-      apiFetch(`${link}posts/post-delete/${id}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      })
-        .then(res => {
-          if (res.ok) {
-            navigate('/posts');
-            window.location.reload();
-          } else {
-            console.error("Server Error");
-          }
-        })
-        .catch(err => console.error("Error:", err));
+  const handleDeletePost = async () => {
+    try {
+      if (confirm('Do you want to delete this post?')) {
+        const response = await apiFetch(`${link}posts/post-delete/${id}`, {
+          method: 'DELETE',
+          credentials: 'include',
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || "Delete failed");
+        }
+
+        navigate('/posts');
+        window.location.reload(); // Refresh the page to update the list of posts
+      }
+    } catch (err) {
+      console.error("Delete Error:", err);
+      setError(err.message);
     }
-  };
+
+  }
 
   const inputStyle = "py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]";
   const labelStyle = "text-sm text-[#344054] font-semibold";
@@ -155,13 +160,18 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
             Edit Post
           </button>
           <button
-            onClick={() => deletePost()}
+            onClick={() => handleDeletePost()}
             className="px-4 py-2 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors flex items-center gap-2"
           >
             Delete Post
           </button>
         </div>
 
+      )}
+      {error && (
+        <ErrorMessage>
+          {error}
+        </ErrorMessage>
       )}
     </div>
   );
