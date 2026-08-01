@@ -16,6 +16,8 @@ import { apiFetch } from './utils/api.js';
 import Footer from './components/Footer.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import Loader from './components/Loader/Loader.jsx';
+import Reset from './view/Reset.jsx';
+import NewPassword from './view/NewPassword.jsx';
 
 // const link = import.meta.env.VITE_LINK_API_URL;
 const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
@@ -159,6 +161,8 @@ function App() {
         <Route path="/login" element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />} />
         <Route path="/signup" element={<Signup link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />} />
         <Route path='/logout' element={<Login link={link} setIsLoggedIn={setIsLoggedIn} setCurrentUser={setCurrentUser} />}></Route>
+        <Route path='/reset' element={<Reset link={link} />}></Route>
+        <Route path='/reset/:token' element={<NewPassword link={link} />}></Route>
       </Routes>
       <Footer />
     </div>

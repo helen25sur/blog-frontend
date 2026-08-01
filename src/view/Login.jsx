@@ -94,7 +94,7 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
             />
             <span className="ml-2 text-sm text-gray-800">Remember me</span>
           </label>
-          <a href="#" className="text-sm text-black hover:underline font-medium">
+          <a href="/reset" className="text-sm text-black hover:underline font-medium">
             Forgot password?
           </a>
         </div>

@@ -76,3 +76,27 @@ export async function logout(link) {
 
   return response.json();
 }
+
+export async function reset(link, email) {
+  const response = await apiFetch(`${link}reset`, {
+    method: 'POST',
+    body: JSON.stringify({ email })
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Something went wrong");
+  }
+  return data;
+}
+
+export async function postNewPassword(link, token, password, confirmPassword) {
+  const response = await apiFetch(`${link}reset/${token}`, {
+    method: 'POST',
+    body: JSON.stringify({ password, confirmPassword, token })
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Something went wrong");
+  }
+  return data;
+}
