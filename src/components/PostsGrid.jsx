@@ -10,9 +10,9 @@ export default function PostsGrid({ posts = [], authorName }) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+    <div className="posts-list grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
       {posts.map((post) => (
-        <PostCard key={post.id || post._id} post={post} authorName={authorName} />
+        <PostCard key={post._id} post={post} authorName={authorName} />
       ))}
     </div>
   );

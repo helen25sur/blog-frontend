@@ -131,7 +131,7 @@ function App() {
 
   const recentPosts = [...posts].slice(-4).reverse();
   const allPosts = [...posts].reverse();
-  const postsCurrentUser = [...posts].filter(post => post.userId?._id === currentUser?._id);
+  const postsCurrentUser = [...posts].filter(post => post.userId?._id === currentUser?._id).reverse();
 
   if (isAuthLoading) {
     return <Loader />;
