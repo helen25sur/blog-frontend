@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '../utils/api';
 
 import ErrorMessage from './Error.jsx';
+import { form } from '../styles/formStyles.jsx';
 
 export default function PostDetail({ link, isLoggedIn, setPosts }) {
   const { id } = useParams();
@@ -87,10 +88,10 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
 
   }
 
-  const inputStyle = "py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]";
-  const labelStyle = "text-sm text-[#344054] font-semibold";
-  const buttonLightStyle = "px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors";
-  const buttonDarkStyle = "py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors";
+  const inputStyle = form.input;
+  const labelStyle = form.label;
+  const buttonLightStyle = form.buttonLight;
+  const buttonDarkStyle = form.buttonDark;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -112,7 +113,7 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
           <div className="form-group mb-4 flex flex-col gap-2">
             <label className={labelStyle} htmlFor="imageURL">Image URL</label>
             <input className={inputStyle} value={editImageURL} id="imageURL" name="imageURL" onChange={e => setEditImageURL(e.target.value)} placeholder="Image URL" required />
-            <span className="hint-text text-[13px] text-[#667085]">Provide a high-quality direct link to an image (Unsplash recommended)</span>
+            <span className="hint-text text-sm text-gray-500">Provide a high-quality direct link to an image (Unsplash recommended)</span>
           </div>
 
           <div className="form-group mb-4 flex flex-col gap-2">
@@ -155,13 +156,13 @@ export default function PostDetail({ link, isLoggedIn, setPosts }) {
         <div className="action-block flex gap-3">
           <button
             onClick={() => setIsEditing(true)}
-            className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
+            className="border border-gray-300 px-4 py-2 text-sm font-medium hover:bg-gray-100 transition cursor-pointer"
           >
             Edit Post
           </button>
           <button
             onClick={() => handleDeletePost()}
-            className="px-4 py-2 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors flex items-center gap-2"
+            className="border border-red-200 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 transition cursor-pointer"
           >
             Delete Post
           </button>

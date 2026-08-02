@@ -6,6 +6,8 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link, setCurrent
   const navigate = useNavigate();
   const location = useLocation();
 
+  const buttonLightStyle = "border border-gray-400 px-6 py-3 font-medium hover:bg-gray-100 transition rounded-none cursor-pointer";
+
   const logoutHandler = async () => {
     setIsLoggedIn(false);
     try {
@@ -62,18 +64,18 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link, setCurrent
             </li>
           )}
           {!isLoggedIn && (
-            <li className="border border-solid rounded-lg ">
-              <NavLink className="px-4 py-1 block w-full h-full" to="/login">Login</NavLink>
+            <li className={buttonLightStyle}>
+              <NavLink className="px-4  block w-full h-full" to="/login">Login</NavLink>
             </li>
           )}
           {!isLoggedIn && (
-            <li className="border border-solid rounded-lg">
-              <NavLink className="px-4 py-1 block w-full h-full" to="/signup">Sign Up</NavLink>
+            <li className={buttonLightStyle}>
+              <NavLink className="px-4  block w-full h-full" to="/signup">Sign Up</NavLink>
             </li>
           )}
           {isLoggedIn && (
-            <li className="border border-solid rounded-lg">
-              <NavLink className="px-4 py-1 block w-full h-full" to="/logout" onClick={logoutHandler}>Logout</NavLink>
+            <li className={buttonLightStyle}>
+              <NavLink className="px-4 block w-full h-full" to="/logout" onClick={logoutHandler}>Logout</NavLink>
             </li>
           )}
         </ul>

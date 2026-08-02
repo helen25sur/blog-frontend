@@ -1,7 +1,9 @@
+import { form } from '../styles/formStyles.jsx';
+
 export default function FormAddPost({ title, setTitle, imageURL, setImageURL, content, setContent, addPost }) {
-  const inputStyle = "py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]";
-  const labelStyle = "text-sm text-[#344054] font-semibold";
-  const buttonDarkStyle = "py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors";
+  const inputStyle = form.input;
+  const labelStyle = form.label;
+  const buttonDarkStyle = form.buttonDark;
 
   const handleSubmit = (event) => {
     console.log(event)

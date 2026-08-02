@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { checkLoginStatus, signup } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
 import ErrorMessage from '../components/Error';
+import { form } from '../styles/formStyles.jsx';
 
 export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
   const [username, setUsername] = useState('');
@@ -40,6 +41,10 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
     }
   };
 
+  const inputStyle = form.input;
+  const labelStyle = form.label;
+  const buttonDarkStyle = form.buttonDark;
+
   return (
     <AuthLayout
       title="SIGNUP"
@@ -58,8 +63,8 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
       <form onSubmit={handleSubmit}
         className="space-y-6">
         {/* <!-- Username Field --> */}
-        <div>
-          <label htmlFor="username" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="username" className={labelStyle}>
             Username
           </label>
           <input
@@ -68,13 +73,13 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
             id="username"
             name="username"
             placeholder="Enter your username"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
           // required
           />
         </div>
         {/* <!-- Email Field --> */}
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="email" className={labelStyle}>
             Email
           </label>
           <input
@@ -83,14 +88,14 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
             id="email"
             name="email"
             placeholder="Enter your email"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
           // required
           />
         </div>
         {/* 
                 <!-- Password Field --> */}
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="password" className={labelStyle}>
             Password
           </label>
           <input
@@ -99,12 +104,12 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
             id="password"
             name="password"
             placeholder="Enter your password"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
           // required
           />
         </div>
-        <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="confirmPassword" className={labelStyle}>
             Confirm Password
           </label>
           <input
@@ -113,7 +118,7 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
             id="confirmPassword"
             name="confirmPassword"
             placeholder="Confirm your password"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
           // required
           />
         </div>
@@ -123,7 +128,7 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
           <label className="flex items-center">
             <input
               type="checkbox"
-              className="w-4 h-4 border border-gray-600 rounded focus:ring-0 focus:ring-offset-0"
+              className="w-4 h-4 border border-gray-600 focus:ring-0 focus:ring-offset-0"
             />
             <span className="ml-2 text-sm text-gray-800">Remember me</span>
           </label>
@@ -132,7 +137,7 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
         {/* <!-- Submit Button --> */}
         <button
           type="submit"
-          className="w-full py-3 bg-black text-white font-medium rounded-md hover:bg-gray-900 cursor-pointer transition"
+          className={`w-full py-3 ${buttonDarkStyle}`}
         >
           Sign up
         </button>

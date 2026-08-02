@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
+import { form } from '../styles/formStyles.jsx';
+
 export default function FormEditProfile({ user, editProfile }) {
   const navigate = useNavigate();
   const [localUser, setLocalUser] = useState(user || {});
@@ -10,10 +12,10 @@ export default function FormEditProfile({ user, editProfile }) {
   }
 
 
-  const inputStyle = "py-3 px-4 text-base font-[inherit] text-[#101828] bg-white border border-[#D0D5DD] rounded-lg focus:outline-none focus:border focus:border-[#4C1D95] focus:ring-4 focus:ring-[#4C1D951a]";
-  const labelStyle = "text-sm text-[#344054] font-semibold";
-  const buttonDarkStyle = "py-3 px-4 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors";
-  const buttonLightStyle = "px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors";
+  const inputStyle = form.input;
+  const labelStyle = form.label;
+  const buttonLightStyle = form.buttonLight;
+  const buttonDarkStyle = form.buttonDark;
 
   const handleSubmit = (event) => {
     event.preventDefault();

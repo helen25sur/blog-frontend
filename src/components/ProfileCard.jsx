@@ -1,7 +1,12 @@
 import ProfileStats from './ProfileStats';
 
+import { form } from '../styles/formStyles.jsx';
+
 export default function ProfileCard({ user, onEditProfile, onCreatePost, countPost }) {
   // if (!user) return null;
+
+  const buttonLightStyle = form.buttonLight;
+  const buttonDarkStyle = form.buttonDark;
 
   return (
     <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-10 mb-14 flex flex-col md:flex-row gap-8 items-start">
@@ -13,20 +18,20 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost, countPo
 
       <div className="grow w-full">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-3">
-          <div>
+          <div className="flex flex-col gap-1 mr-auto">
             <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{user.userName}</h2>
             <p className="text-sm text-[#667085] mt-1">{user.email}</p>
           </div>
           <div className="mr-auto flex gap-3 flex-wrap">
             <button
               onClick={onEditProfile}
-              className="px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 transition-colors"
+              className={buttonLightStyle}
             >
               Edit Profile
             </button>
             <button
               onClick={onCreatePost}
-              className="px-4 py-2 bg-[#4C1D95] text-white rounded-lg text-sm font-semibold hover:bg-[#3B0764] cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#4C1D95]/20 transition-colors flex items-center gap-2"
+              className={buttonDarkStyle}
             >
               <span>+</span> New Post
             </button>

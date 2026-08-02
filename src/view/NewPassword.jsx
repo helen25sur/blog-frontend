@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { postNewPassword } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
 import ErrorMessage from '../components/Error';
+import { form } from '../styles/formStyles.jsx';
 
 export default function NewPassword({ link }) {
   const [password, setPassword] = useState('');
@@ -37,6 +38,10 @@ export default function NewPassword({ link }) {
     }
   };
 
+  const inputStyle = form.input;
+  const labelStyle = form.label;
+  const buttonDarkStyle = form.buttonDark;
+
   return (
     <AuthLayout
       title="NEW PASSWORD"
@@ -54,8 +59,8 @@ export default function NewPassword({ link }) {
         className="space-y-6">
         {/* 
                 <!-- Password Field --> */}
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="password" className={labelStyle}>
             Password
           </label>
           <input
@@ -64,13 +69,13 @@ export default function NewPassword({ link }) {
             id="password"
             name="password"
             placeholder="Enter your password"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
             required
           />
         </div>
 
-        <div>
-          <label htmlFor="confirmPassword" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="confirmPassword" className={labelStyle}>
             Confirm Password
           </label>
           <input
@@ -79,7 +84,7 @@ export default function NewPassword({ link }) {
             id="confirmPassword"
             name="confirmPassword"
             placeholder="Repeat your password"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
             required
           />
         </div>
@@ -87,7 +92,7 @@ export default function NewPassword({ link }) {
         {/* <!-- Submit Button --> */}
         <button
           type="submit"
-          className="w-full py-3 bg-black text-white font-medium rounded-md hover:bg-gray-900 cursor-pointer transition"
+          className={`w-full py-3 ${buttonDarkStyle}`}
         >
           Set New Password
         </button>

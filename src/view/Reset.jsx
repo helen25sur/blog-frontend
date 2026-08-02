@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { reset } from '../services/auth';
 import AuthLayout from '../components/AuthLayout';
 import ErrorMessage from '../components/Error';
+import { form } from '../styles/formStyles.jsx';
 
 export default function Reset({ link }) {
   const [email, setEmail] = useState('');
@@ -30,6 +31,10 @@ export default function Reset({ link }) {
     }
   };
 
+  const inputStyle = form.input;
+  const labelStyle = form.label;
+  const buttonDarkStyle = form.buttonDark;
+
   return (
     <AuthLayout
       title="RESET PASSWORD"
@@ -49,8 +54,8 @@ export default function Reset({ link }) {
         onSubmit={handleSubmit}
         className="space-y-6">
         {/* <!-- Email Field --> */}
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-black mb-2">
+        <div className='flex flex-col gap-2'>
+          <label htmlFor="email" className={labelStyle}>
             Email
           </label>
           <input
@@ -59,7 +64,7 @@ export default function Reset({ link }) {
             id="email"
             name="email"
             placeholder="Enter your email"
-            className="w-full px-4 py-3 border border-gray-600 rounded-md focus:border-black transition"
+            className={inputStyle}
             required
           />
         </div>
@@ -67,7 +72,7 @@ export default function Reset({ link }) {
         {/* <!-- Submit Button --> */}
         <button
           type="submit"
-          className="w-full py-3 bg-black text-white font-medium rounded-md hover:bg-gray-900 cursor-pointer transition"
+          className={`w-full py-3 ${buttonDarkStyle}`}
         >
           Reset Password
         </button>
