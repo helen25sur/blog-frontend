@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @custom-variant hover (&:hover);
 
+body {
+  scrollbar-gutter: stable;
+}
+
 .post-item .post-title {
   position: relative;
 }
