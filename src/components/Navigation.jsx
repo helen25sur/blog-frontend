@@ -1,7 +1,7 @@
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark, faArrowRightToBracket, faUserPlus, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { apiFetch, initCsrf, resetCsrf } from "../utils/api";
 import { form } from "../styles/formStyles";
 
@@ -100,17 +100,26 @@ export default function Navigation({ isLoggedIn, setIsLoggedIn, link, setCurrent
         <ul className="flex items-center gap-10">
           {!isLoggedIn && (
             <li className={`${buttonLightStyle} relative z-40`}>
-              <NavLink className="px-4  block w-full h-full relative  z-40" to="/login" onClick={() => setIsMenuOpen(false)}>Login</NavLink>
+              <NavLink className=" md:px-4 md:py-0 block w-full h-full text-[0px] md:text-sm" to="/login" onClick={() => setIsMenuOpen(false)}>
+                Login
+                <FontAwesomeIcon className="text-3xl md:hidden" icon={faArrowRightToBracket} />
+              </NavLink>
             </li>
           )}
           {!isLoggedIn && (
             <li className={`${buttonLightStyle} relative z-40`}>
-              <NavLink className="px-4  block w-full h-full" to="/signup" onClick={() => setIsMenuOpen(false)}>Sign Up</NavLink>
+              <NavLink className="md:px-4 md:py-0  block w-full h-full text-[0px] md:text-sm" to="/signup" onClick={() => setIsMenuOpen(false)}>
+                Sign&nbsp;Up
+                <FontAwesomeIcon className="text-3xl md:hidden" icon={faUserPlus} />
+              </NavLink>
             </li>
           )}
           {isLoggedIn && (
             <li className={`${buttonLightStyle} relative z-40`}>
-              <NavLink className="px-4 block w-full h-full relative" to="/logout" onClick={logoutHandler}>Logout</NavLink>
+              <NavLink className="md:px-4 md:py-0 block w-full h-full text-[0px] md:text-sm" to="/logout" onClick={logoutHandler}>
+                Logout
+                <FontAwesomeIcon className="text-3xl md:hidden" icon={faArrowRightFromBracket} />
+              </NavLink>
             </li>
           )}
         </ul>

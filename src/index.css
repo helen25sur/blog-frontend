@@ -18,3 +18,9 @@
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+@media (width >=48rem) {
+  .svg-inline--fa {
+    display: none;
+  }
+}
