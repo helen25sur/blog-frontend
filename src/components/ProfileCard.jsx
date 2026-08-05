@@ -9,11 +9,11 @@ export default function ProfileCard({ user, onEditProfile, onCreatePost, countPo
   const buttonDarkStyle = form.buttonDark;
 
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-6 md:p-10 mb-14 flex flex-col md:flex-row gap-8 items-start">
+    <div className="bg-gray-50 border border-gray-200 p-6 md:p-10 mb-14 flex flex-col md:flex-row gap-8 items-start">
       <img
         src={user.avatarUrl || '/default-avatar.png'}
         alt={user.userName}
-        className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md shrink-0"
+        className="w-28 h-28 rounded object-cover border-4 border-white shadow-md shrink-0"
       />
 
       <div className="grow w-full">
