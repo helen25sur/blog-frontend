@@ -10,7 +10,7 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -23,7 +23,15 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
       setCurrentUser(data.user);
       navigate('/');
     } catch (error) {
-      setError(error.message);
+      console.log(error.message);
+      console.log(Array.isArray(error.message));
+      const message = error.message;
+
+      setErrors(
+        Array.isArray(message)
+          ? message
+          : [message]
+      );
       console.error('Signup error:', error);
     }
   };
@@ -54,13 +62,19 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
       footerLinkHref="/login"
     >
 
-      {error && (
+      {errors.length > 0 && (
         <ErrorMessage>
-          <span>{error}</span>
+          <ul>
+            {errors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+
         </ErrorMessage>
       )}
 
       <form onSubmit={handleSubmit}
+        noValidate
         className="space-y-6">
         {/* <!-- Username Field --> */}
         <div className='flex flex-col gap-2'>
@@ -121,17 +135,6 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
             className={inputStyle}
           // required
           />
-        </div>
-
-        {/* <!-- Remember Me --> */}
-        <div className="flex items-center justify-between">
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              className="w-4 h-4 border border-gray-600 focus:ring-0 focus:ring-offset-0"
-            />
-            <span className="ml-2 text-sm text-gray-800">Remember me</span>
-          </label>
         </div>
 
         {/* <!-- Submit Button --> */}
