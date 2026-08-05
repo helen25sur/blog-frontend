@@ -55,6 +55,7 @@ export default function Login({ link, setIsLoggedIn, setCurrentUser }) {
       )}
 
       <form
+        noValidate
         onSubmit={handleSubmit}
         className="space-y-6 mb-8">
         {/* <!-- Email Field --> */}

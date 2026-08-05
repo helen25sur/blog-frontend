@@ -16,6 +16,7 @@ export default function Signup({ link, setIsLoggedIn, setCurrentUser }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrors([]);
     try {
       const data = await signup(link, { username, email, password, confirmPassword });
       await checkLoginStatus(link, setIsLoggedIn);
