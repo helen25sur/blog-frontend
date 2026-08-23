@@ -4,8 +4,8 @@ import App from './App.jsx';
 import { BrowserRouter } from 'react-router-dom';
 import { initCsrf } from './utils/api.js';
 
-// const link = import.meta.env.VITE_LINK_API_URL;
-const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
+const link = import.meta.env.VITE_LINK_API_URL;
+// const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
 
 async function startApp() {
   await initCsrf(link);

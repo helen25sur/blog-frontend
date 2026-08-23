@@ -19,8 +19,8 @@ import Loader from './components/Loader/Loader.jsx';
 import Reset from './view/Reset.jsx';
 import NewPassword from './view/NewPassword.jsx';
 
-// const link = import.meta.env.VITE_LINK_API_URL;
-const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
+const link = import.meta.env.VITE_LINK_API_URL;
+// const link = import.meta.env.VITE_LINK_API_URL_LOCAL;
 
 function App() {
   const [posts, setPosts] = useState([]);
